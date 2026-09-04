@@ -26,19 +26,7 @@ export async function POST(request: Request) {
       targetRecipient: RECIPIENT_EMAIL,
     };
 
-    // 1. Save lead to waitlist_leads.json
-    let existingLeads: any[] = [];
-    if (fs.existsSync(LEADS_FILE_PATH)) {
-      try {
-        existingLeads = JSON.parse(fs.readFileSync(LEADS_FILE_PATH, 'utf-8'));
-      } catch (e) {
-        existingLeads = [];
-      }
-    }
-    existingLeads.push(newLead);
-    fs.writeFileSync(LEADS_FILE_PATH, JSON.stringify(existingLeads, null, 2), 'utf-8');
-
-    // 2. Prepare email payload
+    // 1. Prepare email payload
     const mailSubject = `🚀 New Emplora Early Access Lead: ${email}`;
     const mailHtml = `
       <div style="font-family: Arial, sans-serif; padding: 24px; color: #171b23; background-color: #f8f9fb; border-radius: 8px;">
@@ -55,7 +43,7 @@ export async function POST(request: Request) {
       </div>
     `;
 
-    // 3. Gmail Nodemailer Transport Dispatch
+    // 2. Gmail Nodemailer Transport Dispatch
     const smtpUser = process.env.SMTP_USER || 'jhaabhinav16@gmail.com';
     const smtpPass = process.env.SMTP_PASS || 'hdjpxiknjgkdimbm';
 
@@ -67,21 +55,20 @@ export async function POST(request: Request) {
       },
     });
 
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: `"Emplora Waitlist" <${smtpUser}>`,
       to: RECIPIENT_EMAIL,
       subject: mailSubject,
       html: mailHtml,
     });
 
-    const successLog = `[${timestamp}] GMAIL SENT SUCCESSFULLY TO ${RECIPIENT_EMAIL}. Message ID: ${info.messageId}\n`;
-    fs.appendFileSync(LOG_FILE_PATH, successLog, 'utf-8');
+    const mockPosition = Math.floor(Math.random() * 50) + 140;
 
     return NextResponse.json({
       success: true,
       emailSent: true,
       recipient: RECIPIENT_EMAIL,
-      position: 100 + existingLeads.length,
+      position: mockPosition,
     });
   } catch (error: any) {
     console.error('Waitlist API Error:', error);

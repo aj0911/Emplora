@@ -13,22 +13,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Emplora — Multi-Tenant Payroll & HR Platform (Coming Soon)',
+  title: 'Emplora | Autonomous AI Payroll & Intelligent HR',
   description:
-    'Emplora is a modern multi-tenant payroll and HR platform. Isolated organization workspaces, 1-click automated payroll calculation, real EPF/ESIC/PT statutory compliance. Launching September 15, 2026.',
+    'Emplora uses autonomous AI agents to audit payroll runs, predict statutory EPF/ESIC deductions, detect salary anomalies, and answer HR queries in real-time. Launching September 2026.',
   keywords: [
     'Emplora',
-    'Payroll SaaS',
+    'AI Payroll SaaS',
+    'Autonomous HR Copilot',
     'Multi-Tenant HR',
-    'EPF Compliance',
+    'AI Anomaly Detection',
+    'EPF Compliance Automation',
     'ESIC Calculation',
-    'Automated Payslips',
-    'Attendance Register',
+    'Next-gen Payroll',
   ],
   authors: [{ name: 'Emplora Team' }],
+  robots: 'index, follow',
   openGraph: {
-    title: 'Emplora — Multi-Tenant Payroll & HR Platform',
-    description: 'Isolated organization workspaces, 1-click automated payroll calculation, statutory compliance. Launching September 15, 2026.',
+    type: 'website',
+    title: 'Emplora — Autonomous Payroll & Intelligent HR',
+    description: 'AI agents that audit payroll, predict compliance, and answer HR queries in real-time. Join the waitlist.',
+    siteName: 'Emplora',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Emplora | Autonomous AI Payroll & Intelligent HR',
+    description: 'AI agents that audit payroll, predict compliance, and answer HR queries in real-time.',
   },
 };
 
