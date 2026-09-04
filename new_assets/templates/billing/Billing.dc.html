@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Billing & payment" description="Org-facing subscription: plan, seat-based charge, payment method, GST invoices, upgrade checkout." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand"><svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div>
+<div style="padding:0 8px 10px;font-size:var(--text-xs);color:var(--color-text-subtle)">Acme Textiles Pvt Ltd</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Dashboard</a><a href="#" class="nav-item">Agent</a></div>
+<div class="nav-group">People</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Employees<span class="count">248</span></a><a href="#" class="nav-item">Attendance</a><a href="#" class="nav-item">Leave requests</a></div>
+<div class="nav-group">Payroll</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Payroll run</a><a href="#" class="nav-item">Payslips</a><a href="#" class="nav-item">Books</a><a href="#" class="nav-item">Reports</a></div>
+<div class="nav-group">Administration</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Users</a><a href="#" class="nav-item">Roles</a><a href="#" class="nav-item is-active">Billing</a><a href="#" class="nav-item">Organization settings</a></div>
+</aside>
+<main style="min-width:0">
+<div class="topbar"><div class="crumbs">Administration <span>/</span> <b>Billing</b></div><span class="grow"></span><span class="badge badge-success">Paid through 30 Sep</span><span class="avatar avatar-sm">PN</span></div>
+<div class="page">
+<div class="page-head"><div><div class="page-title">Billing</div><div class="page-sub">Growth plan · billed monthly on the 1st · GST 18% extra</div></div><div class="row gap-2"><button class="btn btn-secondary">Download invoices</button><button class="btn btn-primary">Change plan</button></div></div>
+
+<div class="grid-4 gap-4" style="margin-bottom:20px">
+<div class="stat"><div class="stat-label">Current plan</div><div class="stat-value" style="font-family:var(--font-sans);font-size:var(--text-xl)">Growth</div><div class="hint" style="margin-top:4px">11–200 employees · ₹49 / employee</div></div>
+<div class="stat"><div class="stat-label">Billable employees</div><div class="stat-value">248</div><div class="stat-delta delta-up">↑ 6 since last cycle</div></div>
+<div class="stat"><div class="stat-label">Next invoice · 01 Oct</div><div class="stat-value">₹14,341</div><div class="hint" style="margin-top:4px">₹12,152 + ₹2,189 GST</div></div>
+<div class="stat"><div class="stat-label">Payment method</div><div class="stat-value" style="font-family:var(--font-sans);font-size:var(--text-md)">UPI autopay</div><div class="hint" style="margin-top:4px">priya@okhdfcbank · mandate active</div></div>
+</div>
+
+<div class="alert alert-warning" style="margin-bottom:20px"><div style="flex:1"><div class="alert-title">You are 48 employees over the Growth plan's ceiling</div>Growth covers up to 200. You are not blocked and nothing was auto-upgraded — but the Books plan costs ₹79 per employee with accounting included, and at 248 employees it replaces the desktop accounting licence you are paying for separately.</div><div class="row gap-2"><button class="btn btn-secondary btn-sm">Compare plans</button><button class="btn btn-primary btn-sm">Move to Books</button></div></div>
+
+<div class="split" style="margin-bottom:20px">
+<div class="card">
+<div class="card-head"><div class="card-title">This cycle</div><span class="hint">01 Sep – 30 Sep 2026</span></div>
+<table class="table" style="font-size:var(--text-sm)">
+<thead><tr><th>Line</th><th class="num">Quantity</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead>
+<tbody>
+<tr><td>Growth plan · employee seats</td><td class="num">242</td><td class="num">₹49.00</td><td class="num">₹11,858.00</td></tr>
+<tr><td>Mid-cycle joiners · pro-rated</td><td class="num">6</td><td class="num">₹24.50</td><td class="num">₹147.00</td></tr>
+<tr><td>Exits · credited next cycle</td><td class="num">3</td><td class="num">₹49.00</td><td class="num" style="color:var(--success-700)">−₹147.00</td></tr>
+<tr><td>Extra AI import volume</td><td class="num">0</td><td class="num muted">included</td><td class="num muted">—</td></tr>
+<tr><td>GST 18% · Maharashtra</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">₹2,132.64</td></tr>
+</tbody>
+<tr class="table-total"><td>Total payable on 01 Oct</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">₹13,990.64</td></tr>
+</table>
+<div class="card-foot row gap-2"><span class="hint">Seats are counted from the register at the start of each cycle. Exits stop billing the following cycle.</span></div>
+</div>
+<div class="stack gap-4">
+<div class="card card-pad stack gap-3">
+<b style="font-size:var(--text-sm)">Payment method</b>
+<div class="row gap-3" style="padding:12px;border:1px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-surface-2)"><span class="num" style="font-size:var(--text-sm);flex:1">UPI autopay · priya@okhdfcbank</span><span class="badge badge-success">Active</span></div>
+<div class="row gap-3" style="padding:12px;border:1px solid var(--color-border);border-radius:var(--radius-sm)"><span class="num" style="font-size:var(--text-sm);flex:1">HDFC card ···· 4417</span><span class="badge badge-neutral badge-plain">Backup</span></div>
+<div class="row gap-2"><button class="btn btn-secondary btn-sm">Add method</button><button class="btn btn-ghost btn-sm">Switch to net banking</button></div>
+<span class="hint">A failed charge retries for seven days. Payroll never stops during a billing failure — your data and runs stay available.</span>
+</div>
+<div class="card card-pad stack gap-2"><b style="font-size:var(--text-sm)">Billing contact &amp; GSTIN</b><div class="stack gap-1" style="font-size:var(--text-sm)"><span>Priya Nair · priya@acmetextiles.in</span><span class="num muted">GSTIN 27AABCA1234C1Z5</span><span class="muted">E-101, MIDC Bhiwandi, Maharashtra 421302</span></div><button class="btn btn-secondary btn-sm" style="width:fit-content">Edit</button></div>
+</div>
+</div>
+
+<div class="table-wrap">
+<div class="table-toolbar"><b style="font-size:var(--text-sm)">Invoices</b><span class="grow"></span><select class="select" style="width:150px"><option>FY 2026–27</option><option>FY 2025–26</option></select><button class="btn btn-secondary btn-sm">Export all</button></div>
+<table class="table">
+<thead><tr><th>Invoice</th><th>Period</th><th class="num">Employees</th><th class="num">Amount</th><th class="num">GST</th><th>Status</th><th style="width:120px"></th></tr></thead>
+<tbody>
+<tr><td class="num">EMP/26-27/0084</td><td>Aug 2026</td><td class="num">242</td><td class="num">₹11,858.00</td><td class="num">₹2,134.44</td><td><span class="badge badge-success">Paid</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+<tr><td class="num">EMP/26-27/0071</td><td>Jul 2026</td><td class="num">239</td><td class="num">₹11,711.00</td><td class="num">₹2,107.98</td><td><span class="badge badge-success">Paid</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+<tr><td class="num">EMP/26-27/0059</td><td>Jun 2026</td><td class="num">236</td><td class="num">₹11,564.00</td><td class="num">₹2,081.52</td><td><span class="badge badge-warning">Retried once</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+<tr><td class="num">EMP/26-27/0046</td><td>May 2026</td><td class="num">231</td><td class="num">₹11,319.00</td><td class="num">₹2,037.42</td><td><span class="badge badge-success">Paid</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+</tbody>
+</table>
+<div class="table-foot"><span>4 invoices in FY 2026–27 · ₹46,452 + GST paid to date</span><div class="row gap-2"><button class="btn btn-secondary btn-sm">Previous</button><button class="btn btn-secondary btn-sm">Next</button></div></div>
+</div>
+
+<div class="dialog-backdrop" style="position:relative;inset:auto;margin-top:24px;padding:0;background:none;backdrop-filter:none;display:block">
+<div class="dialog" style="width:min(520px,100%);box-shadow:var(--shadow-lg)">
+<div class="dialog-head"><div class="dialog-title">Move to the Books plan</div><button class="btn btn-ghost btn-sm btn-icon" aria-label="Close">×</button></div>
+<div class="dialog-body stack gap-3">
+<div class="row"><span class="muted" style="flex:1">248 employees × ₹79</span><span class="num">₹19,592.00</span></div>
+<div class="row"><span class="muted" style="flex:1">Credit for the unused part of September</span><span class="num" style="color:var(--success-700)">−₹6,076.00</span></div>
+<div class="row"><span class="muted" style="flex:1">GST 18%</span><span class="num">₹2,432.88</span></div>
+<div class="row" style="padding-top:10px;border-top:1px solid var(--color-border)"><b style="flex:1">Charged today</b><span class="num" style="font-size:var(--text-lg);font-weight:600">₹15,948.88</span></div>
+<div class="alert alert-info"><div>Books unlocks the journal, ledgers, month close and Tally/Busy export for everyone in your organization. Downgrading later keeps your books readable but stops new postings.</div></div>
+<label class="check"><input type="checkbox"><span>I authorise Emplora to charge my UPI mandate today and monthly thereafter</span></label>
+</div>
+<div class="dialog-actions"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Pay ₹15,948.88 &amp; upgrade</button></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  apply(){ document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light'); }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

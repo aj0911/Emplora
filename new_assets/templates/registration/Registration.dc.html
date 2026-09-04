@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Registration wizard" description="Public 5-step org signup — step 3, payroll basics, with the review summary pattern." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="min-height:100vh;background:var(--color-canvas)">
+<div style="height:56px;border-bottom:1px solid var(--color-border);background:var(--color-surface);display:flex;align-items:center;gap:16px;padding:0 28px">
+<div class="brand" style="margin:0"><svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div>
+<span class="grow" style="flex:1"></span>
+<span class="hint">Already have an account?</span><a href="#" style="font-size:var(--text-sm)">Sign in</a>
+</div>
+<div style="max-width:760px;margin:0 auto;padding:36px 24px 72px">
+<div class="stepper" style="margin-bottom:28px"><span class="step is-done"><span class="step-dot">✓</span>Your company</span><span class="step-line"></span><span class="step is-done"><span class="step-dot">✓</span>Your account</span><span class="step-line"></span><span class="step is-current"><span class="step-dot">3</span>Payroll basics</span><span class="step-line"></span><span class="step"><span class="step-dot">4</span>Branding</span><span class="step-line"></span><span class="step"><span class="step-dot">5</span>Review</span></div>
+<h1 style="font-size:var(--text-3xl);margin-bottom:6px">Payroll basics</h1>
+<p class="muted" style="margin-bottom:24px">The minimum needed to run your first payroll. Deeper statutory settings — financial year, TDS regime, weekly offs — wait in Organization settings and never block you here.</p>
+<div class="card">
+<div class="card-body" style="max-width:560px">
+<div class="field"><label class="label-req">Pay cycle</label>
+<div class="stack gap-2"><label class="check"><input type="radio" name="cycle" checked><span>Last day of the month<span class="hint" style="display:block">Most common for monthly salaried staff</span></span></label><label class="check"><input type="radio" name="cycle"><span>A fixed date each month</span></label></div>
+</div>
+<div class="field"><label class="label-req">Salary calculated on</label>
+<div class="seg"><button class="seg-opt" aria-selected="true">Calendar days</button><button class="seg-opt">Working days</button></div>
+<span class="hint">Calendar days divides by 30 or 31; working days excludes weekly offs and holidays.</span>
+</div>
+<hr>
+<div class="stack gap-4">
+<div><label class="switch"><input type="checkbox" checked><span>Provident fund (EPF) applicable<span class="hint" style="display:block">Mandatory above 20 employees</span></span></label>
+<div style="margin-top:10px;padding-left:44px;max-width:320px"><div class="field" style="margin:0"><label>PF establishment code</label><input class="input" placeholder="MHBAN0012345000"><span class="hint">Optional now — you can add it before your first challan</span></div></div></div>
+<div><label class="switch"><input type="checkbox" checked><span>ESIC applicable<span class="hint" style="display:block">Applies to employees under the gross ceiling</span></span></label>
+<div style="margin-top:10px;padding-left:44px;max-width:320px"><div class="field" style="margin:0"><label>ESIC employer code</label><input class="input" placeholder="31000123450000999"><span class="hint">Optional now</span></div></div></div>
+<div><label class="switch"><input type="checkbox" checked><span>Professional tax applicable<span class="hint" style="display:block">Pre-filled from Maharashtra, the state you chose in step 1</span></span></label>
+<div style="margin-top:10px;padding-left:44px;max-width:320px"><div class="field" style="margin:0"><label>Slab set</label><select class="select"><option>Maharashtra (₹200 / ₹300 Feb)</option><option>Karnataka (₹200 flat)</option><option>Tamil Nadu (half-yearly)</option></select></div></div></div>
+</div>
+</div>
+<div class="card-foot row gap-2"><a href="#" style="font-size:var(--text-sm)">Back</a><span class="grow" style="flex:1"></span><button class="btn btn-secondary">Save and finish later</button><button class="btn btn-primary btn-lg">Continue to branding</button></div>
+</div>
+<div class="card" style="margin-top:24px">
+<div class="card-head"><div class="card-title">What you have entered so far</div><span class="hint">Every section stays editable until you confirm in step 5</span></div>
+<div class="card-body grid-2 gap-5">
+<div class="stack gap-2"><div class="row"><span class="kicker" style="flex:1">Your company</span><a href="#" style="font-size:var(--text-xs)">Edit</a></div><div style="font-size:var(--text-sm)"><b>Acme Textiles Pvt Ltd</b><div class="muted">Textile / Garment · 201–1000 employees</div><div class="muted">Bhiwandi, Maharashtra</div></div></div>
+<div class="stack gap-2"><div class="row"><span class="kicker" style="flex:1">Your account</span><a href="#" style="font-size:var(--text-xs)">Edit</a></div><div style="font-size:var(--text-sm)"><b>Priya Nair</b> <span class="badge badge-success">Verified</span><div class="muted num">priya@acmetextiles.in</div><div class="muted num">+91 98200 41172</div></div></div>
+</div>
+</div>
+<p class="hint" style="margin-top:20px;text-align:center;max-width:52ch;margin-left:auto;margin-right:auto">Five short steps, two of them optional. Nothing here is permanent — everything can be changed in Organization settings once you are in.</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:1200}}">
+class Component extends DCLogic {
+  apply(){ document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light'); }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

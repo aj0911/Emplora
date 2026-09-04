@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Payroll run wizard" description="Step 2 of the run: per-employee review with overrides, statutory columns and a totals row." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand"><svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div>
+<div style="padding:0 8px 10px;font-size:var(--text-xs);color:var(--color-text-subtle)">Acme Textiles Pvt Ltd</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Dashboard</a></div>
+<div class="nav-group">People</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Employees<span class="count">248</span></a><a href="#" class="nav-item">Attendance</a><a href="#" class="nav-item">Leave requests<span class="count">12</span></a></div>
+<div class="nav-group">Payroll</div>
+<div class="stack gap-1"><a href="#" class="nav-item is-active">Payroll run</a><a href="#" class="nav-item">Payslips</a><a href="#" class="nav-item">Reports</a></div>
+<div class="nav-group">Administration</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Users</a><a href="#" class="nav-item">Roles</a><a href="#" class="nav-item">Organization settings</a></div>
+</aside>
+<main style="min-width:0">
+<div class="topbar"><div class="crumbs">Payroll <span>/</span> Payroll run <span>/</span> <b>August 2026</b></div><span class="grow"></span><span class="badge badge-info">Processing</span><button class="btn btn-ghost btn-sm">Save &amp; exit</button></div>
+<div class="page">
+<div class="page-head"><div><div class="page-title">August 2026 payroll run</div><div class="page-sub">248 employees · calendar-day basis · pay date 31 Aug 2026</div></div><div class="row gap-2"><button class="btn btn-secondary">Back to attendance</button><button class="btn btn-primary">Continue to approval</button></div></div>
+<div class="card" style="margin-bottom:16px"><div class="card-body row gap-6 wrap">
+<div class="stepper"><span class="step is-done"><span class="step-dot">✓</span>Lock attendance</span><span class="step-line"></span><span class="step is-current"><span class="step-dot">2</span>Review &amp; adjust</span><span class="step-line"></span><span class="step"><span class="step-dot">3</span>Approve &amp; generate</span></div>
+<span class="grow"></span>
+<div class="stack gap-1"><span class="kicker">Working days</span><span class="num" style="font-size:var(--text-md)">26 of 31</span></div>
+<div class="stack gap-1"><span class="kicker">Overrides made</span><span class="num" style="font-size:var(--text-md)">3</span></div>
+</div></div>
+<div class="alert alert-warning" style="margin-bottom:16px"><div style="flex:1"><div class="alert-title">3 employees cannot be paid yet</div>Manoj Iyer, Sana Kapoor and Vikram Rao have no verified bank account. They will be excluded from the transfer file unless the details are added before approval.</div><div class="row gap-2"><button class="btn btn-secondary btn-sm">Fix bank details</button></div></div>
+<div class="table-wrap">
+<div class="table-toolbar"><input class="input" style="width:200px" placeholder="Search employees"><select class="select" style="width:150px"><option>All departments</option><option>Production</option><option>Engineering</option></select><button class="btn btn-secondary btn-sm">Only overrides</button><button class="btn btn-secondary btn-sm">Only exceptions</button><span class="grow"></span><span class="hint">Amounts are editable · every change needs a reason</span></div>
+<div style="overflow:auto">
+<table class="table">
+<thead><tr><th class="pin">Employee</th><th class="num">Paid days</th><th class="num">Gross</th><th class="num">EPF</th><th class="num">ESIC</th><th class="num">PT</th><th class="num">TDS</th><th class="num">Net pay</th><th>Flags</th></tr></thead>
+<tbody>
+<tr><td class="pin"><div class="cell-person"><span class="avatar">AQ</span><div class="who"><div class="nm">Aisha Qureshi</div><div class="sub">EMP-0121 · Engineering</div></div></div></td><td class="num">26.0</td><td class="num">₹1,26,000</td><td class="num">₹1,800</td><td class="num">—</td><td class="num">₹200</td><td class="num">₹19,690</td><td class="num"><b>₹1,04,310</b></td><td></td></tr>
+<tr><td class="pin"><div class="cell-person"><span class="avatar">PN</span><div class="who"><div class="nm">Priya Nair</div><div class="sub">EMP-0104 · Finance</div></div></div></td><td class="num">26.0</td><td class="num">₹78,000</td><td class="num">₹1,800</td><td class="num">—</td><td class="num">₹200</td><td class="num">₹4,760</td><td class="num"><b>₹71,240</b></td><td></td></tr>
+<tr><td class="pin"><div class="cell-person"><span class="avatar">RD</span><div class="who"><div class="nm">Rohit Deshmukh</div><div class="sub">EMP-0117 · Production</div></div></div></td><td class="num">24.5</td><td class="num">₹34,500</td><td class="num">₹1,800</td><td class="num">₹259</td><td class="num">₹200</td><td class="num">₹351</td><td class="num"><b>₹31,890</b></td><td><span class="badge badge-info">Override · LOP reversed</span></td></tr>
+<tr><td class="pin"><div class="cell-person"><span class="avatar">MI</span><div class="who"><div class="nm">Manoj Iyer</div><div class="sub">EMP-0134 · Logistics</div></div></div></td><td class="num">26.0</td><td class="num">₹28,800</td><td class="num">₹1,800</td><td class="num">₹216</td><td class="num">₹200</td><td class="num">₹464</td><td class="num"><b>₹26,120</b></td><td><span class="badge badge-danger">No bank account</span></td></tr>
+<tr><td class="pin"><div class="cell-person"><span class="avatar">SK</span><div class="who"><div class="nm">Sana Kapoor</div><div class="sub">EMP-0141 · Production</div></div></div></td><td class="num">11.0</td><td class="num">₹9,820</td><td class="num">₹1,178</td><td class="num">₹74</td><td class="num">₹200</td><td class="num">—</td><td class="num"><b>₹8,368</b></td><td><span class="badge badge-warning">Joined mid-cycle</span></td></tr>
+<tr><td class="pin"><div class="cell-person"><span class="avatar">VR</span><div class="who"><div class="nm">Vikram Rao</div><div class="sub">EMP-0088 · Production</div></div></div></td><td class="num">18.0</td><td class="num">₹17,880</td><td class="num">₹1,800</td><td class="num">₹134</td><td class="num">₹200</td><td class="num">—</td><td class="num"><b>₹15,746</b></td><td><span class="badge badge-neutral">Final settlement</span></td></tr>
+</tbody>
+<tr class="table-total"><td class="pin">248 employees</td><td class="num">6,412.5</td><td class="num">₹1,34,60,800</td><td class="num">₹4,46,400</td><td class="num">₹39,680</td><td class="num">₹49,600</td><td class="num">₹11,32,420</td><td class="num">₹1,18,42,300</td><td></td></tr>
+</table>
+</div>
+<div class="table-foot"><span>Showing 6 of 248 · 3 overrides, 1 exclusion</span><div class="row gap-2"><button class="btn btn-secondary btn-sm">Previous</button><button class="btn btn-secondary btn-sm">Next</button></div></div>
+</div>
+<div class="row gap-4 wrap" style="margin-top:20px;align-items:flex-start">
+<div class="card" style="flex:1"><div class="card-head"><div class="card-title">Cycle summary</div><span class="hint">Recomputed after every override</span></div><div class="card-body stack gap-3">
+<div class="row"><span class="muted" style="flex:1">Gross earnings</span><span class="num">₹1,34,60,800</span></div>
+<div class="row"><span class="muted" style="flex:1">Employee deductions (EPF, ESIC, PT, TDS)</span><span class="num" style="color:var(--danger-700)">-₹16,18,500</span></div>
+<div class="row"><span class="muted" style="flex:1">Employer contributions</span><span class="num">₹4,86,120</span></div>
+<hr style="margin:2px 0">
+<div class="row"><b style="flex:1">Net payable to employees</b><span class="num" style="font-size:var(--text-lg);font-weight:600">₹1,18,42,300</span></div>
+<div class="row"><span class="muted" style="flex:1">Excluded from transfer file</span><span class="num">₹26,120 · 1 employee</span></div>
+</div></div>
+<div class="card" style="width:340px"><div class="card-head"><div class="card-title">Override log</div><span class="badge badge-neutral">3</span></div><div class="stack">
+<div style="padding:12px 20px;border-bottom:1px solid var(--color-border)"><div style="font-size:var(--text-sm);font-weight:500">Rohit Deshmukh · paid days 23.5 → 24.5</div><div class="hint">Attendance correction agreed with plant supervisor — Priya Nair, 29 Aug</div></div>
+<div style="padding:12px 20px;border-bottom:1px solid var(--color-border)"><div style="font-size:var(--text-sm);font-weight:500">Sana Kapoor · TDS ₹410 → ₹0</div><div class="hint">Below threshold for part-month joiner — Rahul Menon, 29 Aug</div></div>
+<div style="padding:12px 20px"><div style="font-size:var(--text-sm);font-weight:500">Vikram Rao · added arrears ₹4,250</div><div class="hint">Leave encashment on exit — Priya Nair, 30 Aug</div></div>
+</div></div>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;rowHeight&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:36,&quot;max&quot;:56,&quot;step&quot;:2,&quot;default&quot;:44,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Density&quot;}}">
+class Component extends DCLogic {
+  apply(){
+    document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light');
+    document.documentElement.style.setProperty('--row-h', (this.props.rowHeight || 44) + 'px');
+  }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

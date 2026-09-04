@@ -1,0 +1,89 @@
+<!-- @dsCard group="Foundations" viewport="1160x1180" name="Logo" subtitle="The Emplora mark — final spec and developer handoff" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Emplora logo</title><link rel="stylesheet" href="../styles.css">
+<style>body{padding:40px 44px;background:var(--color-canvas)}.spec{max-width:1060px;display:flex;flex-direction:column;gap:34px}.panel{padding:24px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}.cap{font-size:var(--text-2xs);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:var(--tracking-caps);font-weight:600}.word{font-family:var(--font-sans);font-weight:600;letter-spacing:-.03em}.tiles{display:flex;align-items:flex-end;gap:18px}.tile{display:grid;place-items:center;border-radius:9px}pre{margin:0;padding:16px;background:var(--neutral-900);color:var(--neutral-100);border-radius:var(--radius-sm);font-family:var(--font-mono);font-size:var(--text-xs);line-height:1.6;overflow:auto}.no{display:grid;place-items:center;height:96px;background:var(--color-surface-inset);border-radius:var(--radius-sm);position:relative}</style>
+</head><body><div class="spec">
+
+<section><h3>The mark</h3><span class="hint" style="display:block;max-width:70ch">A soft lowercase e drawn as one continuous stroke: the crossbar runs left out of the bowl, and the mouth at the lower right is real negative space rather than a shape laid over the top. It has no container, so it behaves like a letter beside the wordmark instead of an app tile — the people-software family, friendly and quiet, leaving the payroll story to the words. One path, one stroke weight, one colour: it survives a favicon, a single-ink print run and a photograph without redrawing.</span>
+<div class="panel row gap-6 wrap" style="margin-top:14px;align-items:center">
+<svg viewBox="0 0 40 40" width="112" height="112" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--primary-500)" stroke-width="5.4" stroke-linecap="round"/></svg>
+<div class="row gap-3" style="align-items:center"><svg viewBox="0 0 40 40" width="52" height="52"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--primary-500)" stroke-width="5.4" stroke-linecap="round"/></svg><span class="word" style="font-size:34px">Emplora</span></div>
+<span class="grow" style="flex:1"></span>
+<div class="tiles">
+<div class="tile" style="width:16px;height:16px"><svg viewBox="0 0 40 40" width="16" height="16"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--primary-500)" stroke-width="5.4" stroke-linecap="round"/></svg></div>
+<div class="tile" style="width:24px;height:24px"><svg viewBox="0 0 40 40" width="24" height="24"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--primary-500)" stroke-width="5.4" stroke-linecap="round"/></svg></div>
+<div class="tile" style="width:52px;height:52px;background:var(--neutral-900)"><svg viewBox="0 0 40 40" width="42" height="42"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="#fff" stroke-width="5.4" stroke-linecap="round"/></svg></div>
+<div class="tile" style="width:52px;height:52px;background:var(--primary-500)"><svg viewBox="0 0 40 40" width="42" height="42"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="#fff" stroke-width="5.4" stroke-linecap="round"/></svg></div>
+</div>
+</div>
+</section>
+
+<section><h3>Geometry</h3><span class="hint" style="display:block">One path in a 40×40 viewBox. Scale the viewBox; never scale, thin or thicken the stroke.</span>
+<div class="panel grid-2 gap-6" style="margin-top:14px;font-size:var(--text-sm)">
+<div class="stack gap-2">
+<div class="row"><span class="muted" style="flex:1">Bowl</span><span class="num">circle, centre 20 20, radius 13</span></div>
+<div class="row"><span class="muted" style="flex:1">Stroke weight</span><span class="num">5.4 · round caps</span></div>
+<div class="row"><span class="muted" style="flex:1">Crossbar</span><span class="num">y = 20, x = 33 → 7</span></div>
+<div class="row"><span class="muted" style="flex:1">Terminal</span><span class="num">28.2 29.2 (≈315°)</span></div>
+</div>
+<div class="stack gap-2">
+<div class="row"><span class="muted" style="flex:1">Mouth opening</span><span class="num">≈5 units of clear space</span></div>
+<div class="row"><span class="muted" style="flex:1">Ink bounds</span><span class="num">4.3 → 35.7 both axes</span></div>
+<div class="row"><span class="muted" style="flex:1">Minimum size</span><span class="num">16 px mark · 96 px lockup</span></div>
+<div class="row"><span class="muted" style="flex:1">Path</span><span class="num" style="font-size:var(--text-2xs)">M28.2 29.2A13 13 0 1 1 33 20H7</span></div>
+</div>
+</div>
+</section>
+
+<section><h3>Colour</h3>
+<div class="panel row gap-5 wrap" style="margin-top:14px">
+<div class="stack gap-2"><div style="width:120px;height:56px;border-radius:var(--radius-sm);background:var(--primary-500)"></div><span class="cap">Mark, light ground</span><span class="hint num">#4360EA · --primary-500</span></div>
+<div class="stack gap-2"><div style="width:120px;height:56px;border-radius:var(--radius-sm);background:var(--primary-400)"></div><span class="cap">Mark, dark ground</span><span class="hint num">#6B84F7 · --primary-400</span></div>
+<div class="stack gap-2"><div style="width:120px;height:56px;border-radius:var(--radius-sm);background:#fff;border:1px solid var(--color-border)"></div><span class="cap">Mark on cobalt</span><span class="hint num">#FFFFFF</span></div>
+<div class="stack gap-2"><div style="width:120px;height:56px;border-radius:var(--radius-sm);background:var(--neutral-900)"></div><span class="cap">Wordmark</span><span class="hint num">#171B23 · --neutral-900</span></div>
+</div>
+<span class="hint" style="display:block;margin-top:10px">The mark is always one flat colour. On any ground that is neither light neutral nor cobalt — a photograph, a coloured print stock, an embroidered patch — use <code>logo-mono.svg</code> in a single ink.</span>
+</section>
+
+<section><h3>Files</h3><span class="hint" style="display:block">Three approved SVGs in <code>assets/</code>. Do not re-trace the mark from a screenshot or rebuild it in code.</span>
+<div class="panel grid-3 gap-5" style="margin-top:14px">
+<div class="stack gap-2"><span class="cap">assets/logo.svg</span><span class="hint">Cobalt mark. The default: sidebar, favicon source, app icon, document headers.</span></div>
+<div class="stack gap-2"><span class="cap">assets/logo-mono.svg</span><span class="hint">Same path filled with <code>currentColor</code> — inherits whatever ink surrounds it.</span></div>
+<div class="stack gap-2"><span class="cap">assets/logo-lockup.svg</span><span class="hint">Mark plus wordmark, 190×40, 6-unit gap. The wordmark is live Geist 600 text — convert to outlines before sending it anywhere Geist is not installed.</span></div>
+</div>
+</section>
+
+<section><h3>In place</h3>
+<div class="grid-3 gap-4" style="margin-top:14px">
+<div class="panel" style="padding:16px"><div class="brand" style="margin:0"><svg class="mark" viewBox="0 0 40 40" width="22" height="22"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div><div class="hint" style="padding-left:2px">Acme Textiles Pvt Ltd</div><span class="cap" style="display:block;margin-top:12px">Sidebar · 22px</span></div>
+<div class="panel" style="padding:16px;background:var(--neutral-900);border-color:var(--neutral-800)"><div class="brand" style="margin:0;color:var(--neutral-50)"><svg class="mark" viewBox="0 0 40 40" width="22" height="22"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--primary-400)" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div><div class="hint" style="padding-left:2px;color:var(--neutral-400)">Platform console</div><span class="cap" style="display:block;margin-top:12px;color:var(--neutral-400)">Dark · 22px</span></div>
+<div class="panel" style="padding:16px;background:var(--primary-500);border-color:var(--primary-600)"><div class="brand" style="margin:0;color:#fff"><svg class="mark" viewBox="0 0 40 40" width="22" height="22"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="#fff" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div><div class="hint" style="padding-left:2px;color:var(--primary-100)">Sign in to your account</div><span class="cap" style="display:block;margin-top:12px;color:var(--primary-100)">On cobalt · 22px</span></div>
+</div>
+</section>
+
+<section><h3>Clear space and don'ts</h3><span class="hint" style="display:block">Clear space on all four sides equals a quarter of the mark's height — 10 units in the 40-unit viewBox. Nothing enters that box, including the wordmark, which sits 6 units clear of the ink on the right.</span>
+<div class="grid-4 gap-4" style="margin-top:14px">
+<div class="panel" style="padding:12px"><div class="no"><div style="position:absolute;inset:16px;border:1px dashed var(--color-border-strong);border-radius:6px"></div><svg viewBox="0 0 40 40" width="46" height="46"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--primary-500)" stroke-width="5.4" stroke-linecap="round"/></svg></div><span class="hint" style="display:block;margin-top:8px">Clear space = ¼ height</span></div>
+<div class="panel" style="padding:12px"><div class="no"><svg viewBox="0 0 40 40" width="70" height="48" preserveAspectRatio="none" style="opacity:.5"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--primary-500)" stroke-width="5.4" stroke-linecap="round"/></svg></div><span class="hint" style="display:block;margin-top:8px">Never stretch</span></div>
+<div class="panel" style="padding:12px"><div class="no"><svg viewBox="0 0 40 40" width="46" height="46" style="opacity:.5"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--primary-500)" stroke-width="2.4" stroke-linecap="round"/></svg></div><span class="hint" style="display:block;margin-top:8px">Never change the weight</span></div>
+<div class="panel" style="padding:12px"><div class="no"><svg viewBox="0 0 40 40" width="46" height="46" style="opacity:.5"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9aadff"/><stop offset="1" stop-color="#22306e"/></linearGradient></defs><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="url(#g)" stroke-width="5.4" stroke-linecap="round"/></svg></div><span class="hint" style="display:block;margin-top:8px">No gradients or shadows</span></div>
+</div>
+<span class="hint" style="display:block;margin-top:12px">Also: never rotate or flip it, never close the mouth or square the caps, never put it inside a circle or rounded-square badge to fake an app tile (export <code>logo.svg</code> centred on a cobalt canvas instead), never set the wordmark in a face other than Geist 600, and never use the mark as a bullet, a spinner or a list icon.</span>
+</section>
+
+<section><h3>Implementation</h3><span class="hint" style="display:block">Inline it in the app shell so it inherits the theme; reference the file for anything static.</span>
+<div class="panel" style="margin-top:14px"><pre>&lt;svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"&gt;
+  &lt;path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none"
+        stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/&gt;
+&lt;/svg&gt;
+
+&lt;!-- static / head --&gt;
+&lt;link rel="icon" type="image/svg+xml" href="/assets/logo.svg"&gt;
+&lt;link rel="apple-touch-icon" sizes="180x180" href="/assets/logo-180.png"&gt;
+&lt;img src="/assets/logo-lockup.svg" alt="Emplora" width="190" height="40"&gt;</pre>
+<span class="hint" style="display:block;margin-top:10px">Stroking <code>var(--color-primary)</code> makes the mark follow the theme automatically: cobalt-500 on light, cobalt-400 on dark. On a cobalt ground, override the stroke to <code>#fff</code>. For the 180×180 touch icon, place <code>logo.svg</code> at 60% of the canvas, centred, on <code>#4360EA</code> with white stroke.</span>
+</div>
+</section>
+
+<section><h3>Ownership</h3><span class="hint" style="display:block;max-width:70ch">This mark was drawn for Emplora from scratch — a single-stroke lowercase e with a 13-unit bowl, a crossbar running past the bowl on the left, and a 315° terminal. It is not copied from any logo I know of, but nobody can promise a shape is globally unique, and a lowercase letterform is a crowded family: clearance is a legal question, not a design one. Before you file or print at scale, run a trademark search in your classes (Nice class 42 for the SaaS, class 9 for software) with an Indian trademark attorney, plus a reverse-image search on <code>assets/logo.svg</code>. If a conflict appears, the crossbar length and the terminal angle are the two dials that can move without losing the idea.</span></section>
+
+</div></body></html>

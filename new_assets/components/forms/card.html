@@ -1,0 +1,55 @@
+<!-- @dsCard group="Components" viewport="1180x1080" name="Forms & inputs" subtitle="Fields, currency, toggles, choices" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Forms & inputs</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:40px 44px;background:var(--color-canvas)}.spec{max-width:1140px;display:flex;flex-direction:column;gap:36px}.sec>h3{margin-bottom:4px}.sec>.hint{display:block;margin-bottom:14px;max-width:70ch}.demo{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;padding:20px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}.demo.col{flex-direction:column;align-items:stretch}.cap{font-size:var(--text-2xs);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:var(--tracking-caps);font-weight:600}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const {Button,ButtonGroup,Badge,StatusBadge,STATUSES,Input,Textarea,Select,Checkbox,Switch,SegmentedControl,Money,Avatar,PersonCell,AvatarStack,StatCard,DataTable,AppShell,PageHeader,Tabs,Stepper,Alert,Modal,EmptyState}=window.Nocturne_noctur;
+function Sec({title,note,children,col}){return <section className="sec"><h3>{title}</h3><span className="hint">{note}</span><div className={col?'demo col':'demo'}>{children}</div></section>;}
+
+function Page(){const [basis,setBasis]=React.useState('calendar');return <>
+  <Sec title="Text fields" note="Label above, 32px control, one line of hint or error below — never both. Required is marked on the label, not the placeholder.">
+    <div style={{width:260}}><Input label="Company name" required placeholder="Acme Textiles Pvt Ltd"/></div>
+    <div style={{width:260}}><Input label="Work email" required defaultValue="priya@acmetextiles.in" hint="Becomes the login ID"/></div>
+    <div style={{width:260}}><Input label="IFSC code" required defaultValue="HDFC000123" error="IFSC must be 11 characters"/></div>
+  </Sec>
+  <Sec title="Currency and statutory codes" note="Amounts are right-aligned tabular mono with a rupee prefix. Codes stay mono so digits are countable.">
+    <div style={{width:200}}><Input label="Basic" money prefix="\u20b9" defaultValue="42,000"/></div>
+    <div style={{width:200}}><Input label="HRA" money prefix="\u20b9" defaultValue="16,800"/></div>
+    <div style={{width:240}}><Input label="UAN" prefix="UAN" defaultValue="101234567890" hint="Required only if PF is applicable"/></div>
+  </Sec>
+  <Sec title="Choices" note="Select for lists of six or more, SegmentedControl for two to four, Switch for settings that apply on the spot.">
+    <div style={{width:220}}><Select label="Industry" required options={['Manufacturing','IT / Software','Retail & Trade','Textile / Garment','Healthcare','Education','Other']}/></div>
+    <div style={{width:220}}><Select label="Company size" required options={['1\u201310','11\u201350','51\u2013200','201\u20131000','1000+']}/></div>
+    <div className="stack gap-2"><span className="cap">Salary calculated on</span><SegmentedControl value={basis} onChange={setBasis} options={[{value:'calendar',label:'Calendar days'},{value:'working',label:'Working days'}]}/></div>
+  </Sec>
+  <Sec title="Toggles and checklists" note="The role permission checklist and the statutory toggles are the two densest uses in the product.">
+    <div className="stack gap-3" style={{minWidth:260}}>
+      <Switch label="PF applicable" description="Adds EPF to every run" defaultChecked/>
+      <Switch label="ESIC applicable" description="Auto-set by the gross ceiling" />
+      <Switch label="Professional tax" description="Pre-filled from the org's state" defaultChecked/>
+    </div>
+    <div className="stack gap-2" style={{minWidth:260}}>
+      <span className="cap">Payroll permissions</span>
+      <Checkbox label="View payroll" defaultChecked/>
+      <Checkbox label="Run payroll" defaultChecked/>
+      <Checkbox label="Approve payroll"/>
+      <Checkbox label="Override calculations" description="Requires a reason on every override"/>
+    </div>
+    <div className="stack gap-2" style={{minWidth:200}}>
+      <span className="cap">Pay cycle</span>
+      <Checkbox type="radio" name="cy" label="Last day of month" defaultChecked/>
+      <Checkbox type="radio" name="cy" label="Fixed date"/>
+    </div>
+  </Sec>
+  <Sec title="Long text" note="Reason fields on overrides and role descriptions.">
+    <div style={{width:420}}><Textarea label="Reason for override" placeholder="Attendance correction agreed with plant supervisor" hint="Stored on the audit log with your name"/></div>
+  </Sec>
+</>;}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<div className="spec"><Page/></div>);
+</script></body></html>

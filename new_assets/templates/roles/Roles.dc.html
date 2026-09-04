@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Roles & permissions" description="Tenant-owned roles list plus the module-grouped permission editor, with locked system roles." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand"><svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div>
+<div style="padding:0 8px 10px;font-size:var(--text-xs);color:var(--color-text-subtle)">Acme Textiles Pvt Ltd</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Dashboard</a></div>
+<div class="nav-group">People</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Employees<span class="count">248</span></a><a href="#" class="nav-item">Attendance</a><a href="#" class="nav-item">Leave requests<span class="count">12</span></a></div>
+<div class="nav-group">Payroll</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Payroll run</a><a href="#" class="nav-item">Payslips</a><a href="#" class="nav-item">Reports</a></div>
+<div class="nav-group">Administration</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Users</a><a href="#" class="nav-item is-active">Roles</a><a href="#" class="nav-item">Organization settings</a></div>
+</aside>
+<main style="min-width:0">
+<div class="topbar"><div class="crumbs">Administration <span>/</span> Roles <span>/</span> <b>Regional HR — Production</b></div><span class="grow"></span><span class="avatar avatar-sm">PN</span></div>
+<div class="page">
+<div class="page-head"><div><div class="page-title">Roles</div><div class="page-sub">Four system roles, seeded at organization creation, plus any custom role you define</div></div><div class="row gap-2"><button class="btn btn-primary">Create custom role</button></div></div>
+<div class="table-wrap" style="margin-bottom:24px">
+<table class="table">
+<thead><tr><th>Role</th><th>Type</th><th class="num">Users assigned</th><th class="num">Permissions granted</th><th style="width:200px"></th></tr></thead>
+<tbody>
+<tr><td><div class="stack"><a href="#" style="font-weight:500">OrgAdmin</a><span class="sub hint">Full access to this organization</span></div></td><td><span class="badge badge-info">System</span></td><td class="num">2</td><td class="num">24 of 24</td><td><div class="row gap-2"><span class="badge badge-lock badge-plain">Locked</span><span class="hint">Cannot be edited or deleted</span></div></td></tr>
+<tr><td><div class="stack"><a href="#" style="font-weight:500">HR</a><span class="sub hint">People and attendance, no payout figures</span></div></td><td><span class="badge badge-info">System</span></td><td class="num">6</td><td class="num">14 of 24</td><td><div class="row gap-2"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm">Clone</button><button class="btn btn-quiet-danger btn-sm is-disabled">Delete</button></div></td></tr>
+<tr><td><div class="stack"><a href="#" style="font-weight:500">Accountant</a><span class="sub hint">Payroll, payslips and reports</span></div></td><td><span class="badge badge-info">System</span></td><td class="num">3</td><td class="num">11 of 24</td><td><div class="row gap-2"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm">Clone</button><button class="btn btn-quiet-danger btn-sm is-disabled">Delete</button></div></td></tr>
+<tr><td><div class="stack"><a href="#" style="font-weight:500">Employee</a><span class="sub hint">Own records only</span></div></td><td><span class="badge badge-info">System</span></td><td class="num">248</td><td class="num">4 of 24</td><td><div class="row gap-2"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm">Clone</button><button class="btn btn-quiet-danger btn-sm is-disabled">Delete</button></div></td></tr>
+<tr class="is-selected"><td><div class="stack"><a href="#" style="font-weight:500">Regional HR — Production</a><span class="sub hint">Cloned from HR · created 12 Aug 2026</span></div></td><td><span class="badge badge-neutral">Custom</span></td><td class="num">14</td><td class="num">9 of 24</td><td><div class="row gap-2"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm">Clone</button><button class="btn btn-quiet-danger btn-sm">Delete</button></div></td></tr>
+</tbody>
+</table>
+<div class="table-foot"><span>5 roles · 273 assignments</span><span class="hint">Delete is disabled while a role is held by anyone</span></div>
+</div>
+
+<div class="split">
+<div class="card">
+<div class="card-head"><div><div class="card-title">Edit role · Regional HR — Production</div><div class="hint">Cloned from HR</div></div><span class="badge badge-neutral">Custom</span></div>
+<div class="card-body">
+<div class="alert alert-info" style="margin-bottom:20px"><div><div class="alert-title">This changes access for 14 people immediately</div>Saving applies to everyone currently holding this role. Nobody is signed out.</div></div>
+<div class="grid-2 gap-4">
+<div class="field"><label class="label-req">Role name</label><input class="input" value="Regional HR — Production"></div>
+<div class="field"><label>Description</label><input class="input" value="People operations for the Bhiwandi plant"></div>
+</div>
+<div class="kicker" style="margin:8px 0 12px">Permissions by module</div>
+<div class="stack gap-3">
+<div class="card" style="box-shadow:none"><div class="card-head" style="padding:10px 16px"><div class="row gap-2"><b style="font-size:var(--text-sm)">Employees</b><span class="badge badge-neutral badge-plain">4 of 5</span></div><label class="switch"><input type="checkbox" checked><span>Select all</span></label></div><div class="card-body" style="padding:12px 16px"><div class="grid-3 gap-3"><label class="check"><input type="checkbox" checked><span>View</span></label><label class="check"><input type="checkbox" checked><span>Create</span></label><label class="check"><input type="checkbox" checked><span>Edit</span></label><label class="check"><input type="checkbox"><span>Delete</span></label><label class="check"><input type="checkbox" checked><span>Import</span></label></div></div></div>
+<div class="card" style="box-shadow:none"><div class="card-head" style="padding:10px 16px"><div class="row gap-2"><b style="font-size:var(--text-sm)">Attendance</b><span class="badge badge-neutral badge-plain">3 of 3</span></div><label class="switch"><input type="checkbox" checked><span>Select all</span></label></div><div class="card-body" style="padding:12px 16px"><div class="grid-3 gap-3"><label class="check"><input type="checkbox" checked><span>View</span></label><label class="check"><input type="checkbox" checked><span>Mark</span></label><label class="check"><input type="checkbox" checked><span>Bulk import</span></label></div></div></div>
+<div class="card" style="box-shadow:none"><div class="card-head" style="padding:10px 16px"><div class="row gap-2"><b style="font-size:var(--text-sm)">Leave</b><span class="badge badge-neutral badge-plain">2 of 3</span></div><label class="switch"><input type="checkbox"><span>Select all</span></label></div><div class="card-body" style="padding:12px 16px"><div class="grid-3 gap-3"><label class="check"><input type="checkbox" checked><span>View</span></label><label class="check"><input type="checkbox" checked><span>Approve / reject</span></label><label class="check"><input type="checkbox"><span>Configure leave types</span></label></div></div></div>
+<div class="card" style="box-shadow:none"><div class="card-head" style="padding:10px 16px"><div class="row gap-2"><b style="font-size:var(--text-sm)">Payroll</b><span class="badge badge-neutral badge-plain">0 of 4</span></div><label class="switch"><input type="checkbox"><span>Select all</span></label></div><div class="card-body" style="padding:12px 16px"><div class="grid-3 gap-3"><label class="check"><input type="checkbox"><span>View</span></label><label class="check"><input type="checkbox"><span>Run payroll</span></label><label class="check"><input type="checkbox"><span>Approve payroll</span></label><label class="check"><input type="checkbox"><span>Override calculations</span><span class="hint">Every override records a reason</span></label></div></div></div>
+<div class="card" style="box-shadow:none"><div class="card-head" style="padding:10px 16px"><div class="row gap-2"><b style="font-size:var(--text-sm)">Reports</b><span class="badge badge-neutral badge-plain">0 of 2</span></div><label class="switch"><input type="checkbox"><span>Select all</span></label></div><div class="card-body" style="padding:12px 16px"><div class="grid-3 gap-3"><label class="check"><input type="checkbox"><span>View</span></label><label class="check"><input type="checkbox"><span>Export</span></label></div></div></div>
+<div class="card" style="box-shadow:none"><div class="card-head" style="padding:10px 16px"><div class="row gap-2"><b style="font-size:var(--text-sm)">Roles &amp; users</b><span class="badge badge-neutral badge-plain">0 of 3</span></div><label class="switch"><input type="checkbox"><span>Select all</span></label></div><div class="card-body" style="padding:12px 16px"><div class="grid-3 gap-3"><label class="check"><input type="checkbox"><span>Manage roles</span></label><label class="check"><input type="checkbox"><span>Invite users</span></label><label class="check"><input type="checkbox"><span>Manage users</span></label></div></div></div>
+</div>
+</div>
+<div class="card-foot row gap-2"><span class="hint">Last edited 12 Aug 2026 by Priya Nair</span><span class="grow"></span><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Save role</button></div>
+</div>
+<div class="stack gap-4">
+<div class="card"><div class="card-head"><div class="card-title">Users with this role</div><span class="badge badge-neutral">14</span></div><div class="stack">
+<div class="row gap-3" style="padding:10px 20px;border-bottom:1px solid var(--color-border)"><span class="avatar avatar-sm">RM</span><div style="min-width:0;flex:1"><div style="font-size:var(--text-sm);font-weight:500">Rahul Menon</div><div class="hint">rahul@acmetextiles.in</div></div></div>
+<div class="row gap-3" style="padding:10px 20px;border-bottom:1px solid var(--color-border)"><span class="avatar avatar-sm">DK</span><div style="min-width:0;flex:1"><div style="font-size:var(--text-sm);font-weight:500">Divya Krishnan</div><div class="hint">divya@acmetextiles.in</div></div></div>
+<div class="row gap-3" style="padding:10px 20px"><span class="avatar avatar-sm">AS</span><div style="min-width:0;flex:1"><div style="font-size:var(--text-sm);font-weight:500">Arun Shetty</div><div class="hint">arun@acmetextiles.in</div></div></div>
+</div><div class="card-foot"><a href="#" style="font-size:var(--text-sm)">See all 14 in Users</a></div></div>
+<div class="card"><div class="card-head"><div class="card-title">Recent changes</div></div><div class="stack">
+<div style="padding:10px 20px;border-bottom:1px solid var(--color-border)"><div style="font-size:var(--text-sm)">Import added to Employees</div><div class="hint">Priya Nair · 12 Aug, 4:02 pm</div></div>
+<div style="padding:10px 20px;border-bottom:1px solid var(--color-border)"><div style="font-size:var(--text-sm)">Role cloned from HR</div><div class="hint">Priya Nair · 12 Aug, 3:58 pm</div></div>
+<div style="padding:10px 20px"><div style="font-size:var(--text-sm)">14 users assigned</div><div class="hint">Priya Nair · 12 Aug, 4:10 pm</div></div>
+</div></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  apply(){ document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light'); }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

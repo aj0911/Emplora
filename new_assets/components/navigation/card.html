@@ -1,0 +1,43 @@
+<!-- @dsCard group="Components" viewport="1240x980" name="Navigation & flow" subtitle="App shell, tabs, wizard stepper" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Navigation & flow</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:40px 44px;background:var(--color-canvas)}.spec{max-width:1140px;display:flex;flex-direction:column;gap:36px}.sec>h3{margin-bottom:4px}.sec>.hint{display:block;margin-bottom:14px;max-width:70ch}.demo{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;padding:20px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}.demo.col{flex-direction:column;align-items:stretch}.cap{font-size:var(--text-2xs);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:var(--tracking-caps);font-weight:600}.frame{border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface)}.frame .shell{min-height:420px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const {Button,ButtonGroup,Badge,StatusBadge,STATUSES,Input,Textarea,Select,Checkbox,Switch,SegmentedControl,Money,Avatar,PersonCell,AvatarStack,StatCard,DataTable,AppShell,PageHeader,Tabs,Stepper,Alert,Modal,EmptyState}=window.Nocturne_noctur;
+function Sec({title,note,children,col}){return <section className="sec"><h3>{title}</h3><span className="hint">{note}</span><div className={col?'demo col':'demo'}>{children}</div></section>;}
+
+const nav=[
+ {items:[{label:'Dashboard'},{label:'Setup',count:'2/5'}]},
+ {label:'People',items:[{label:'Employees',count:248},{label:'Attendance'},{label:'Leave requests',count:12}]},
+ {label:'Payroll',items:[{label:'Payroll run'},{label:'Payslips'},{label:'Reports'}]},
+ {label:'Administration',items:[{label:'Users'},{label:'Roles'},{label:'Organization settings'}]}
+];
+function Page(){const [tab,setTab]=React.useState('Overview');return <>
+  <Sec title="Application shell" note="236px sidebar with grouped nav and the tenant name under the brand, a sticky 52px topbar, and a 24px content well. Nav groups are role-filtered by the app; the shell renders what it is given." col>
+    <div className="frame">
+      <AppShell org="Acme Textiles Pvt Ltd" nav={nav} active="Employees"
+        topbar={<><div className="crumbs">Employees <span>/</span> <b>Directory</b></div><span className="grow"/><Button size="sm">Import Excel</Button><Button size="sm" variant="primary">Add employee</Button><Avatar name="Priya Nair" size="sm"/></>}>
+        <div className="page">
+          <PageHeader title="Employees" sub="248 active \u00b7 12 on notice \u00b7 3 exited this cycle"
+            tabs={<Tabs value={tab} onChange={setTab} tabs={[{value:'Overview',label:'All',count:248},{value:'Notice',label:'On notice',count:12},{value:'Exited',label:'Exited',count:3}]}/>}/>
+          <div style={{marginTop:20}}><EmptyState title="Filtered view" action={<Button size="sm">Clear filters</Button>}>This is the content well. Tables, cards and forms all sit directly in it at 24px padding.</EmptyState></div>
+        </div>
+      </AppShell>
+    </div>
+  </Sec>
+  <Sec title="Tabs" note="Views of a single record — the employee profile's five tabs. Never used for primary navigation.">
+    <Tabs value={tab} onChange={setTab} tabs={['Overview','Salary structure','Attendance','Leave','Payslips']}/>
+  </Sec>
+  <Sec title="Stepper" note="Linear flows only: registration and the payroll run. Completed steps go green, the current one cobalt." col>
+    <Stepper current={2} steps={['Your company','Your account','Payroll basics','Branding','Review']}/>
+    <Stepper current={1} steps={['Lock attendance','Review & adjust','Approve & generate']}/>
+  </Sec>
+</>;}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<div className="spec"><Page/></div>);
+</script></body></html>

@@ -1,0 +1,43 @@
+<!-- @dsCard group="Components" viewport="1180x900" name="Feedback & states" subtitle="Alerts, modals, empty and loading" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Feedback & states</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:40px 44px;background:var(--color-canvas)}.spec{max-width:1140px;display:flex;flex-direction:column;gap:36px}.sec>h3{margin-bottom:4px}.sec>.hint{display:block;margin-bottom:14px;max-width:70ch}.demo{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;padding:20px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}.demo.col{flex-direction:column;align-items:stretch}.cap{font-size:var(--text-2xs);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:var(--tracking-caps);font-weight:600}.modalbox{position:relative;height:300px;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--color-border);width:100%}.modalbox .dialog-backdrop{position:absolute}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const {Button,ButtonGroup,Badge,StatusBadge,STATUSES,Input,Textarea,Select,Checkbox,Switch,SegmentedControl,Money,Avatar,PersonCell,AvatarStack,StatCard,DataTable,AppShell,PageHeader,Tabs,Stepper,Alert,Modal,EmptyState}=window.Nocturne_noctur;
+function Sec({title,note,children,col}){return <section className="sec"><h3>{title}</h3><span className="hint">{note}</span><div className={col?'demo col':'demo'}>{children}</div></section>;}
+
+function Page(){return <>
+  <Sec title="Alerts" note="Tied to the block they sit in. Warning for deadlines and missing data, danger for a failed run, info for consequences." col>
+    <Alert tone="warning" title="EPF challan due in 4 days" actions={<Button size="sm">Open report</Button>}>The August EPF contribution of \u20b93,46,800 must be filed by 15 September.</Alert>
+    <Alert tone="danger" title="3 payslips failed to send">Bank details are missing for Manoj Iyer, Sana Kapoor and Vikram Rao.</Alert>
+    <Alert tone="info" title="This changes access for 14 people immediately">Editing the HR role applies to everyone currently holding it.</Alert>
+    <Alert tone="success" title="Payroll for August approved">248 payslips generated. Bank transfer file is ready to download.</Alert>
+  </Sec>
+  <Sec title="Modal" note="A focused task over the current page. Anything longer than about six fields becomes its own page." col>
+    <div className="modalbox">
+      <Modal title="Invite user" width={440}
+        actions={<><Button>Cancel</Button><Button variant="primary">Send invite</Button></>}>
+        <Input label="Name" required placeholder="Full name"/>
+        <Select label="Role" required options={['OrgAdmin','HR','Accountant','Employee','Regional HR \u2014 Production']} hint="Pulled from your org's live role list"/>
+      </Modal>
+    </div>
+  </Sec>
+  <Sec title="Empty states" note="Every empty collection names its next action. This is the first thing a new tenant sees." col>
+    <EmptyState title="No employees yet" action={<div className="row gap-2"><Button variant="primary" size="sm">Add employee</Button><Button size="sm">Import Excel</Button></div>}>Add your first employee, or import your existing register as an Excel file.</EmptyState>
+  </Sec>
+  <Sec title="Loading and progress" note="Skeletons match the shape of what is coming; progress is used for onboarding completion and long imports." col>
+    <div className="stack gap-2" style={{width:'100%'}}>
+      <div className="skeleton" style={{width:'40%'}}/><div className="skeleton" style={{width:'72%'}}/><div className="skeleton" style={{width:'56%'}}/>
+    </div>
+    <div style={{width:'100%'}}><div className="row gap-3"><div className="progress" style={{flex:1}}><i style={{width:'40%'}}/></div><span className="hint num">2 of 5 done</span></div></div>
+    <div className="toast">Import complete \u2014 248 rows, 3 warnings</div>
+  </Sec>
+</>;}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<div className="spec"><Page/></div>);
+</script></body></html>

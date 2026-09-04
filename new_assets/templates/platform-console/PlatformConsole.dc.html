@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Platform console (SuperAdmin)" description="Ink-chrome platform zone: tenant KPIs, organizations, plans, time-boxed support access, audit log." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div class="shell on-dark" style="background:var(--neutral-950)">
+<aside class="sidebar" style="background:var(--neutral-900);border-color:var(--neutral-800)">
+<div class="brand" style="color:var(--neutral-50)"><svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="#fff" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div>
+<div style="padding:0 8px 10px;font-size:var(--text-xs);color:var(--neutral-500)">Platform console · all organizations</div>
+<div class="stack gap-1"><a href="#" class="nav-item is-active">Overview</a><a href="#" class="nav-item">Organizations<span class="count">42</span></a><a href="#" class="nav-item">Plans &amp; billing</a><a href="#" class="nav-item">Platform users<span class="count">3</span></a><a href="#" class="nav-item">Platform settings</a><a href="#" class="nav-item">Audit log</a></div>
+<div class="nav-group">Support access</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Active grants<span class="count">1</span></a><a href="#" class="nav-item">Requests</a></div>
+<div style="margin-top:auto;padding:10px 8px 4px;border-top:1px solid var(--neutral-800);display:flex;align-items:center;gap:10px"><span class="avatar avatar-sm" style="background:var(--neutral-700);color:var(--neutral-100)">AJ</span><div style="min-width:0"><div style="font-size:var(--text-xs);font-weight:500;color:var(--neutral-100)">Abhinav Jha</div><div style="font-size:var(--text-2xs);color:var(--neutral-500)">SuperAdmin</div></div></div>
+</aside>
+<main style="min-width:0">
+<div class="topbar" style="background:var(--neutral-900);border-color:var(--neutral-800)"><div class="crumbs" style="color:var(--neutral-500)">Platform <span>/</span> <b style="color:var(--neutral-50)">Overview</b></div><span class="grow"></span><span class="badge badge-warning">1 support grant active · 23h left</span><input class="input" style="width:200px;background:var(--neutral-800)" placeholder="Search organizations"></div>
+<div class="page">
+<div class="page-head"><div><div class="page-title" style="color:#fff">Platform overview</div><div class="page-sub">September 2026 · operational metrics only, never tenant payroll detail</div></div><div class="row gap-2"><button class="btn btn-secondary">Export audit log</button><button class="btn btn-primary">Invite platform user</button></div></div>
+
+<div class="grid-4 gap-4" style="margin-bottom:20px">
+<div class="stat"><div class="stat-label">Organizations</div><div class="stat-value">42</div><div class="hint" style="margin-top:4px">31 active · 8 trial · 3 suspended</div></div>
+<div class="stat"><div class="stat-label">Employees across tenants</div><div class="stat-value">6,418</div><div class="stat-delta delta-up">↑ 214 this month</div></div>
+<div class="stat"><div class="stat-label">Payroll processed · Sep</div><div class="stat-value">₹41.2 Cr</div><div class="hint" style="margin-top:4px">Aggregate only, no tenant breakdown</div></div>
+<div class="stat"><div class="stat-label">MRR</div><div class="stat-value">₹4,12,900</div><div class="stat-delta delta-up">↑ 6.1% vs Aug</div></div>
+</div>
+
+<div class="split" style="margin-bottom:20px">
+<div class="table-wrap">
+<div class="table-toolbar"><b style="font-size:var(--text-sm)">Organizations</b><span class="grow"></span><select class="select" style="width:140px;background:var(--neutral-800)"><option>All statuses</option><option>Active</option><option>Trial</option><option>Suspended</option></select><select class="select" style="width:140px;background:var(--neutral-800)"><option>All plans</option><option>Starter</option><option>Growth</option><option>Books</option></select></div>
+<div style="overflow:auto">
+<table class="table">
+<thead><tr><th class="pin" style="background:var(--neutral-800)">Company</th><th>Plan</th><th class="num">Employees</th><th>Status</th><th class="num">Signed up</th><th class="num">Last run</th><th style="width:150px"></th></tr></thead>
+<tbody>
+<tr><td class="pin" style="background:var(--neutral-900)"><div class="stack"><a href="#" style="font-weight:500">Acme Textiles Pvt Ltd</a><span class="sub hint">Bhiwandi · textile</span></div></td><td><span class="badge badge-info badge-plain">Growth</span></td><td class="num">248</td><td><span class="badge badge-success">Active</span></td><td class="num">14 Jan 2026</td><td class="num">31 Aug</td><td><div class="row gap-2"><button class="btn btn-secondary btn-sm">Open</button><button class="btn btn-quiet-danger btn-sm">Suspend</button></div></td></tr>
+<tr><td class="pin" style="background:var(--neutral-900)"><div class="stack"><a href="#" style="font-weight:500">Sunrise Apparels</a><span class="sub hint">Noida · garment</span></div></td><td><span class="badge badge-info badge-plain">Books</span></td><td class="num">96</td><td><span class="badge badge-success">Active</span></td><td class="num">02 Mar 2026</td><td class="num">31 Aug</td><td><div class="row gap-2"><button class="btn btn-secondary btn-sm">Open</button><button class="btn btn-quiet-danger btn-sm">Suspend</button></div></td></tr>
+<tr><td class="pin" style="background:var(--neutral-900)"><div class="stack"><a href="#" style="font-weight:500">Coastal Textiles LLP</a><span class="sub hint">Kochi · just registered</span></div></td><td><span class="badge badge-neutral badge-plain">Starter</span></td><td class="num">0</td><td><span class="badge badge-warning">Trial</span></td><td class="num">28 Aug 2026</td><td class="num muted">—</td><td><div class="row gap-2"><button class="btn btn-secondary btn-sm">Open</button><button class="btn btn-ghost btn-sm">Nudge</button></div></td></tr>
+<tr><td class="pin" style="background:var(--neutral-900)"><div class="stack"><a href="#" style="font-weight:500">Meridian Logistics</a><span class="sub hint">Pune · logistics</span></div></td><td><span class="badge badge-info badge-plain">Growth</span></td><td class="num">184</td><td><span class="badge badge-danger">Suspended</span></td><td class="num">09 Nov 2025</td><td class="num">31 Jul</td><td><div class="row gap-2"><button class="btn btn-secondary btn-sm">Open</button><button class="btn btn-secondary btn-sm">Reactivate</button></div></td></tr>
+</tbody>
+<tr class="table-total"><td class="pin" style="background:var(--neutral-800)">42 organizations</td><td colspan="2" class="hint" style="font-weight:400">6,418 employees</td><td colspan="4" class="hint" style="font-weight:400">Counts and status only — payroll amounts per tenant are not shown here by design</td></tr>
+</table>
+</div>
+<div class="table-foot"><span>Showing 4 of 42</span><div class="row gap-2"><button class="btn btn-secondary btn-sm">Previous</button><button class="btn btn-secondary btn-sm">Next</button></div></div>
+</div>
+<div class="stack gap-4">
+<div class="card card-pad stack gap-3">
+<div class="row gap-2"><b style="font-size:var(--text-sm);flex:1">Signups, last six months</b><span class="hint num">+18</span></div>
+<div style="display:flex;align-items:flex-end;gap:10px;height:96px">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;height:100%"><div style="height:38%;background:var(--primary-700);border-radius:3px 3px 0 0"></div><span class="hint num" style="text-align:center">Apr</span></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;height:100%"><div style="height:52%;background:var(--primary-700);border-radius:3px 3px 0 0"></div><span class="hint num" style="text-align:center">May</span></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;height:100%"><div style="height:46%;background:var(--primary-700);border-radius:3px 3px 0 0"></div><span class="hint num" style="text-align:center">Jun</span></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;height:100%"><div style="height:70%;background:var(--primary-700);border-radius:3px 3px 0 0"></div><span class="hint num" style="text-align:center">Jul</span></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;height:100%"><div style="height:84%;background:var(--primary-700);border-radius:3px 3px 0 0"></div><span class="hint num" style="text-align:center">Aug</span></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;height:100%"><div style="height:96%;background:var(--primary-400);border-radius:3px 3px 0 0"></div><span class="hint num" style="text-align:center;color:var(--neutral-100)">Sep</span></div>
+</div>
+</div>
+<div class="card card-pad stack gap-3">
+<b style="font-size:var(--text-sm)">Plans &amp; billing</b>
+<div class="row"><span class="muted" style="flex:1">Starter · free, ≤10</span><span class="num">11 orgs</span></div>
+<div class="row"><span class="muted" style="flex:1">Growth · ₹49 / employee</span><span class="num">19 orgs</span></div>
+<div class="row"><span class="muted" style="flex:1">Books · ₹79 / employee</span><span class="num">9 orgs</span></div>
+<div class="row"><span class="muted" style="flex:1">Enterprise · negotiated</span><span class="num">3 orgs</span></div>
+<div class="row" style="padding-top:10px;border-top:1px solid var(--color-border)"><b style="flex:1">Collected in Sep</b><span class="num">₹3,96,120</span></div>
+<div class="row gap-2"><button class="btn btn-secondary btn-sm">Edit plan definitions</button><button class="btn btn-ghost btn-sm">Failed charges · 2</button></div>
+</div>
+</div>
+</div>
+
+<div class="split">
+<div class="card">
+<div class="card-head"><div class="card-title" style="color:#fff">Acme Textiles Pvt Ltd</div><span class="badge badge-warning">Support access active · 23h 12m</span></div>
+<div class="card-body">
+<div class="grid-4 gap-4" style="margin-bottom:18px">
+<div class="stack gap-1"><span class="kicker">Employees</span><span class="num" style="font-size:var(--text-md)">248</span></div>
+<div class="stack gap-1"><span class="kicker">Users</span><span class="num" style="font-size:var(--text-md)">11</span></div>
+<div class="stack gap-1"><span class="kicker">Runs completed</span><span class="num" style="font-size:var(--text-md)">19</span></div>
+<div class="stack gap-1"><span class="kicker">Subscription</span><span class="num" style="font-size:var(--text-md)">Paid · 30 Sep</span></div>
+</div>
+<table class="table" style="font-size:var(--text-sm)">
+<thead><tr><th>Payroll run history</th><th>Status</th><th class="num">Employees</th><th>Amounts</th></tr></thead>
+<tbody>
+<tr><td>August 2026</td><td><span class="badge badge-success">Paid</span></td><td class="num">248</td><td class="muted">Hidden by design</td></tr>
+<tr><td>July 2026</td><td><span class="badge badge-success">Paid</span></td><td class="num">242</td><td class="muted">Hidden by design</td></tr>
+<tr><td>June 2026</td><td><span class="badge badge-success">Paid</span></td><td class="num">239</td><td class="muted">Hidden by design</td></tr>
+</tbody>
+</table>
+<div class="alert alert-warning" style="margin-top:16px"><div style="flex:1"><div class="alert-title">You are inside a customer's organization</div>Access was granted for ticket #4821 at 09:42 today and expires in 23h 12m. Every screen you open here is written to Acme's own audit log, visible to their OrgAdmin. Salary, bank and UAN fields stay masked unless the ticket scope includes them.</div><div class="row gap-2"><button class="btn btn-secondary btn-sm">End access now</button></div></div>
+</div>
+<div class="card-foot row gap-2"><button class="btn btn-secondary btn-sm">Suspend organization</button><button class="btn btn-secondary btn-sm">Change plan</button><span class="grow"></span><span class="hint">Suspending blocks logins immediately; payroll data is retained for 90 days.</span></div>
+</div>
+<div class="card">
+<div class="card-head"><div class="card-title" style="color:#fff">Audit log</div><button class="btn btn-secondary btn-sm">Export CSV</button></div>
+<div class="stack">
+<div style="padding:12px 20px;border-bottom:1px solid var(--color-border)"><div class="row gap-2" style="margin-bottom:2px"><span class="badge badge-warning">Support access</span></div><div style="font-size:var(--text-sm)">Granted 24h access to Acme Textiles · ticket #4821</div><div class="hint">Abhinav Jha · today 09:42 · reason recorded</div></div>
+<div style="padding:12px 20px;border-bottom:1px solid var(--color-border)"><div class="row gap-2" style="margin-bottom:2px"><span class="badge badge-danger">Suspension</span></div><div style="font-size:var(--text-sm)">Meridian Logistics suspended · non-payment, 3 failed charges</div><div class="hint">Abhinav Jha · 02 Sep 11:18</div></div>
+<div style="padding:12px 20px;border-bottom:1px solid var(--color-border)"><div class="row gap-2" style="margin-bottom:2px"><span class="badge badge-info">Plan change</span></div><div style="font-size:var(--text-sm)">Sunrise Apparels moved Growth → Books</div><div class="hint">Abhinav Jha · 28 Aug 16:05</div></div>
+<div style="padding:12px 20px"><div class="row gap-2" style="margin-bottom:2px"><span class="badge badge-neutral">Platform user</span></div><div style="font-size:var(--text-sm)">Divya Krishnan promoted to SuperAdmin</div><div class="hint">Abhinav Jha · 21 Aug 10:33</div></div>
+</div>
+<div class="card-foot"><span class="hint">Every platform action against a tenant is timestamped, actor-tagged and exportable. There is no way to act on a tenant without a log row.</span></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  apply(){ document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light'); }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

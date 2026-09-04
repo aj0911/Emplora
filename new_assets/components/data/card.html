@@ -1,0 +1,57 @@
+<!-- @dsCard group="Components" viewport="1180x1000" name="Data display" subtitle="Tables, KPIs, money, people" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Data display</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:40px 44px;background:var(--color-canvas)}.spec{max-width:1140px;display:flex;flex-direction:column;gap:36px}.sec>h3{margin-bottom:4px}.sec>.hint{display:block;margin-bottom:14px;max-width:70ch}.demo{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;padding:20px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}.demo.col{flex-direction:column;align-items:stretch}.cap{font-size:var(--text-2xs);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:var(--tracking-caps);font-weight:600}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const {Button,ButtonGroup,Badge,StatusBadge,STATUSES,Input,Textarea,Select,Checkbox,Switch,SegmentedControl,Money,Avatar,PersonCell,AvatarStack,StatCard,DataTable,AppShell,PageHeader,Tabs,Stepper,Alert,Modal,EmptyState}=window.Nocturne_noctur;
+function Sec({title,note,children,col}){return <section className="sec"><h3>{title}</h3><span className="hint">{note}</span><div className={col?'demo col':'demo'}>{children}</div></section>;}
+
+const rows=[
+ {id:'EMP-0104',name:'Priya Nair',dept:'Finance',gross:78000,epf:1800,esic:0,net:71240,st:'active'},
+ {id:'EMP-0117',name:'Rohit Deshmukh',dept:'Production',gross:34500,epf:1800,esic:259,net:31890,st:'notice'},
+ {id:'EMP-0121',name:'Aisha Qureshi',dept:'Engineering',gross:126000,epf:1800,esic:0,net:104310,st:'active'},
+ {id:'EMP-0134',name:'Manoj Iyer',dept:'Logistics',gross:28800,epf:1800,esic:216,net:26120,st:'unverified'}
+];
+const cols=[
+ {key:'name',header:'Employee',sortable:true,render:r=><PersonCell name={r.name} meta={r.id+' \u00b7 '+r.dept}/>},
+ {key:'st',header:'Status',width:150,render:r=><StatusBadge status={r.st}/>},
+ {key:'gross',header:'Gross',align:'right',sortable:true,render:r=><Money value={r.gross}/>},
+ {key:'epf',header:'EPF',align:'right',render:r=><Money value={r.epf}/>},
+ {key:'esic',header:'ESIC',align:'right',render:r=><Money value={r.esic}/>},
+ {key:'net',header:'Net pay',align:'right',sortable:true,render:r=><b><Money value={r.net}/></b>}
+];
+function Page(){return <>
+  <Sec title="KPI cards" note="Four across, never five. The value is tabular mono; the delta names its comparison period.">
+    <div className="grid-4 gap-4" style={{width:'100%'}}>
+      <StatCard label="Active employees" value="248" delta="6 joined in Aug" direction="up"/>
+      <StatCard label="Projected net payout" value={<Money value={11842300}/>} delta="3.2% vs Jul" direction="up"/>
+      <StatCard label="Statutory due" value={<Money value={486120}/>} hint="EPF + ESIC, due 15 Sep"/>
+      <StatCard label="Pending leave requests" value="12" delta="4 older than 3 days" direction="down"/>
+    </div>
+  </Sec>
+  <Sec title="Data table" note="Sticky header, 44px rows, selection with a count toolbar, client sort, and a totals row for payroll review. Amount columns are right-aligned mono so decimals stack." col>
+    <DataTable rowKey="id" selectable columns={cols} rows={rows}
+      toolbar={<><input className="input" style={{width:220}} placeholder="Search employees"/><Button size="sm">Department</Button><Button size="sm">Status</Button><span className="grow"/><Button size="sm" variant="primary">Add employee</Button></>}
+      totalRow={{name:'248 employees',gross:<Money value={13460800}/>,epf:<Money value={446400}/>,esic:<Money value={39680}/>,net:<Money value={11842300}/>}}
+      footer={<><span>Showing 4 of 248</span><div className="row gap-2"><Button size="sm">Previous</Button><Button size="sm">Next</Button></div></>}/>
+  </Sec>
+  <Sec title="Money" note="Indian digit grouping, rupee sign, paise only where the law needs them: payslip lines and deduction breakdowns.">
+    <div className="stack gap-1"><span className="cap">Dashboard</span><Money value={11842300}/></div>
+    <div className="stack gap-1"><span className="cap">Payslip line</span><Money value={16800} paise/></div>
+    <div className="stack gap-1"><span className="cap">Deduction</span><Money value={-1800} paise tone="negative"/></div>
+    <div className="stack gap-1"><span className="cap">Arrear credit</span><Money value={4250} paise tone="positive"/></div>
+  </Sec>
+  <Sec title="People" note="Initials by default — photographs are optional and an employee record never looks incomplete without one.">
+    <Avatar name="Priya Nair" size="sm"/><Avatar name="Rohit Deshmukh"/><Avatar name="Aisha Qureshi" size="lg"/><Avatar name="Manoj Iyer" size="xl"/>
+    <AvatarStack people={['Priya Nair','Rohit Deshmukh','Aisha Qureshi','Manoj Iyer','Sana Kapoor']}/>
+    <PersonCell name="Priya Nair" meta="EMP-0104 \u00b7 Finance"/>
+  </Sec>
+</>;}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<div className="spec"><Page/></div>);
+</script></body></html>

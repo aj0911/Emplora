@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Books & compliance" description="Payroll accounting: auto journal, ledgers, statutory liabilities, month close, Tally/Busy export." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand"><svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div>
+<div style="padding:0 8px 10px;font-size:var(--text-xs);color:var(--color-text-subtle)">Acme Textiles Pvt Ltd</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Dashboard</a><a href="#" class="nav-item">Agent</a></div>
+<div class="nav-group">People</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Employees<span class="count">248</span></a><a href="#" class="nav-item">Attendance</a><a href="#" class="nav-item">Leave requests</a></div>
+<div class="nav-group">Payroll</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Payroll run</a><a href="#" class="nav-item">Payslips</a><a href="#" class="nav-item is-active">Books</a><a href="#" class="nav-item">Reports</a></div>
+<div class="nav-group">Administration</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Users</a><a href="#" class="nav-item">Roles</a><a href="#" class="nav-item">Organization settings</a></div>
+</aside>
+<main style="min-width:0">
+<div class="topbar"><div class="crumbs">Payroll <span>/</span> Books <span>/</span> <b>August 2026</b></div><span class="grow"></span><button class="btn btn-secondary btn-sm">Export to Tally</button><button class="btn btn-secondary btn-sm">Export to Busy</button><span class="avatar avatar-sm">RM</span></div>
+<div class="page">
+<div class="page-head"><div><div class="page-title">Books</div><div class="page-sub">FY 2026–27 · August open · your accountant sees the same numbers you do</div></div><div class="row gap-2"><button class="btn btn-secondary">Download trial balance</button><button class="btn btn-primary">Close August</button></div></div>
+<div class="tabs" style="margin-bottom:16px"><button class="tab is-active">Journal</button><button class="tab">Ledgers</button><button class="tab">Statutory liabilities<span class="muted num" style="margin-left:6px">4</span></button><button class="tab">Expense claims<span class="muted num" style="margin-left:6px">11</span></button><button class="tab">Month close</button></div>
+
+<div class="grid-4 gap-4" style="margin-bottom:20px">
+<div class="stat"><div class="stat-label">Payroll cost, August</div><div class="stat-value">₹1,39,07,200</div><div class="stat-delta delta-up">↑ 3.2% vs Jul</div></div>
+<div class="stat"><div class="stat-label">Salaries payable</div><div class="stat-value">₹1,18,42,300</div><div class="hint" style="margin-top:4px">Cleared on transfer</div></div>
+<div class="stat"><div class="stat-label">Statutory dues</div><div class="stat-value">₹20,64,900</div><div class="hint" style="margin-top:4px">EPF, ESIC, PT, TDS</div></div>
+<div class="stat"><div class="stat-label">Unposted claims</div><div class="stat-value">₹64,180</div><div class="stat-delta delta-flat">11 claims awaiting approval</div></div>
+</div>
+
+<div class="alert alert-info" style="margin-bottom:20px"><div style="flex:1"><div class="alert-title">The agent prepared August's close</div>Every approved run is posted, GST on 9 of 11 claims is recoverable, and one contra entry is missing a narration. Ask it to explain any line before you sign off.</div><div class="row gap-2"><button class="btn btn-secondary btn-sm">Review 1 issue</button></div></div>
+
+<div class="table-wrap" style="margin-bottom:20px">
+<div class="table-toolbar"><b style="font-size:var(--text-sm)">Journal · August 2026</b><span class="badge badge-success">Posted 31 Aug</span><span class="grow"></span><select class="select" style="width:170px"><option>All voucher types</option><option>Payroll</option><option>Statutory payment</option><option>Reimbursement</option></select><button class="btn btn-secondary btn-sm">Add manual voucher</button></div>
+<div style="overflow:auto">
+<table class="table">
+<thead><tr><th class="pin">Voucher</th><th>Account</th><th>Narration</th><th class="num">Debit</th><th class="num">Credit</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="pin"><div class="stack"><b style="font-size:var(--text-sm)">JV-2608-01</b><span class="sub hint">31 Aug · Payroll</span></div></td><td>Salaries &amp; wages</td><td class="muted">August payroll, 248 employees</td><td class="num">₹1,34,60,800</td><td class="num muted">—</td><td><span class="badge badge-info">Auto</span></td></tr>
+<tr><td class="pin"></td><td>Employer EPF contribution</td><td class="muted">Employer share, August</td><td class="num">₹4,46,400</td><td class="num muted">—</td><td><span class="badge badge-info">Auto</span></td></tr>
+<tr><td class="pin"></td><td>Salaries payable</td><td class="muted">Net payable to employees</td><td class="num muted">—</td><td class="num">₹1,18,42,300</td><td><span class="badge badge-info">Auto</span></td></tr>
+<tr><td class="pin"></td><td>Statutory dues payable</td><td class="muted">EPF, ESIC, PT, TDS withheld</td><td class="num muted">—</td><td class="num">₹20,64,900</td><td><span class="badge badge-info">Auto</span></td></tr>
+<tr><td class="pin"><div class="stack"><b style="font-size:var(--text-sm)">BP-2608-04</b><span class="sub hint">02 Sep · Statutory payment</span></div></td><td>EPF payable → Bank</td><td class="muted">July challan, ECR 5041</td><td class="num">₹3,46,800</td><td class="num">₹3,46,800</td><td><span class="badge badge-neutral">Manual</span></td></tr>
+<tr><td class="pin"><div class="stack"><b style="font-size:var(--text-sm)">RB-2608-11</b><span class="sub hint">26 Aug · Reimbursement</span></div></td><td>Travel expenses · GST input</td><td class="muted">Claim #4821, Priya Nair</td><td class="num">₹1,999</td><td class="num">₹1,999</td><td><span class="badge badge-warning">Narration</span></td></tr>
+</tbody>
+<tr class="table-total"><td class="pin">Balanced</td><td colspan="2" class="hint" style="font-weight:400">6 vouchers · 1 needs a narration before close</td><td class="num">₹1,42,55,999</td><td class="num">₹1,42,55,999</td><td></td></tr>
+</table>
+</div>
+<div class="table-foot"><span>Showing 6 of 41 vouchers</span><div class="row gap-2"><button class="btn btn-secondary btn-sm">Previous</button><button class="btn btn-secondary btn-sm">Next</button></div></div>
+</div>
+
+<div class="split">
+<div class="card">
+<div class="card-head"><div class="card-title">Statutory liabilities</div><span class="badge badge-warning">1 overdue</span></div>
+<table class="table">
+<thead><tr><th>Head</th><th>Period</th><th>Due</th><th class="num">Amount</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>EPF</td><td class="num">Jul 2026</td><td class="num">15 Aug</td><td class="num">₹3,46,800</td><td><span class="badge badge-danger">Overdue</span></td></tr>
+<tr><td>EPF</td><td class="num">Aug 2026</td><td class="num">15 Sep</td><td class="num">₹4,46,400</td><td><span class="badge badge-warning">Due soon</span></td></tr>
+<tr><td>ESIC</td><td class="num">Aug 2026</td><td class="num">15 Sep</td><td class="num">₹39,680</td><td><span class="badge badge-warning">Due soon</span></td></tr>
+<tr><td>TDS · 24Q</td><td class="num">Q2 FY27</td><td class="num">31 Oct</td><td class="num">₹11,32,420</td><td><span class="badge badge-neutral">Scheduled</span></td></tr>
+</tbody>
+</table>
+<div class="card-foot row gap-2"><button class="btn btn-secondary btn-sm">Generate challans</button><span class="grow"></span><span class="hint">Reminders go to the Accountant role</span></div>
+</div>
+<div class="stack gap-4">
+<div class="card card-pad stack gap-3">
+<b style="font-size:var(--text-sm)">Month close · August</b>
+<div class="row gap-3"><div class="progress" style="flex:1"><i style="width:75%"></i></div><span class="hint num">3 of 4</span></div>
+<div class="stack gap-2" style="font-size:var(--text-sm)">
+<div class="row gap-2"><span class="badge badge-success">Done</span><span>All runs approved and posted</span></div>
+<div class="row gap-2"><span class="badge badge-success">Done</span><span>Bank transfer confirmed</span></div>
+<div class="row gap-2"><span class="badge badge-success">Done</span><span>Claims reconciled</span></div>
+<div class="row gap-2"><span class="badge badge-warning">Open</span><span>1 voucher missing a narration</span></div>
+</div>
+<button class="btn btn-primary btn-sm" style="width:fit-content">Close August</button>
+</div>
+<div class="card card-pad stack gap-2"><b style="font-size:var(--text-sm)">Keeping your existing software?</b><span class="hint">Export the month as Tally XML or a Busy-compatible CSV, mapped to your own ledger names. Set the mapping once in Settings and the export matches your chart of accounts every month.</span><button class="btn btn-secondary btn-sm" style="width:fit-content">Ledger mapping</button></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  apply(){ document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light'); }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

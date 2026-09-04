@@ -1,0 +1,34 @@
+<!-- @dsCard group="Foundations" viewport="1160x1060" name="Product patterns" subtitle="Multi-tenancy, roles, money, audit" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Product patterns</title><link rel="stylesheet" href="../styles.css">
+<style>body{padding:40px 44px;background:var(--color-canvas)}.spec{max-width:1080px;display:flex;flex-direction:column;gap:36px}.sec>h3{margin-bottom:4px}.sec>.hint{display:block;margin-bottom:14px;max-width:70ch}.panel{padding:20px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}.cap{font-size:var(--text-2xs);color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:var(--tracking-caps);font-weight:600}</style>
+</head><body><div class="spec">
+<section class="sec"><h3>The tenant is always visible</h3><span class="hint">A payroll platform holds several companies' salary data at once. The org name sits under the brand in the sidebar on every screen, and platform-level (SuperAdmin) screens use a distinct ink topbar so there is never any doubt which side of the boundary you are on.</span>
+<div class="grid-2 gap-4">
+  <div class="panel stack gap-2"><span class="cap">Org-scoped</span><div class="brand" style="margin:0"><span class="brand-mark">E</span>Emplora</div><span class="hint" style="margin:0">Acme Textiles Pvt Ltd</span></div>
+  <div class="panel stack gap-2" style="background:var(--neutral-900);border-color:var(--neutral-800)"><span class="cap" style="color:var(--neutral-400)">Platform</span><div class="brand" style="margin:0;color:var(--neutral-50)"><span class="brand-mark" style="background:var(--neutral-50);color:var(--neutral-900)">E</span>Emplora</div><span class="hint" style="margin:0;color:var(--neutral-400)">Platform console \u00b7 all organizations</span></div>
+</div></section>
+
+<section class="sec"><h3>Permission is data, not an enum</h3><span class="hint">Roles are created by the tenant, so nothing in the interface may hardcode four role names. Role pickers read the org's live list; the permission checklist is grouped by module with a select-all per group; the OrgAdmin role shows a Locked pill and no destructive action.</span>
+<div class="panel stack gap-3">
+  <div class="row gap-2 wrap"><span class="badge badge-info">System</span><span class="badge badge-neutral">Custom</span><span class="badge badge-lock badge-plain">Locked</span><span class="hint">Row-level role markers</span></div>
+  <div class="alert alert-info"><div><div class="alert-title">This changes access for 14 people immediately</div>Editing a role that is currently assigned always says how many people it affects, before saving.</div></div>
+</div></section>
+
+<section class="sec"><h3>Destructive and irreversible actions</h3><span class="hint">Approving a payroll run, suspending an organization and deleting a role are irreversible in practice. Each one states its blast radius in the confirming dialog, in figures, and the confirming button carries the verb — never "OK".</span>
+<div class="panel stack gap-3">
+  <div class="alert alert-warning"><div><div class="alert-title">Approve August payroll for 248 employees?</div>Net payout \u20b91,18,42,300. Payslips are generated and the cycle can no longer be edited.</div></div>
+  <div class="row gap-2"><button class="btn btn-secondary">Back to review</button><button class="btn btn-primary">Approve &amp; generate payslips</button></div>
+</div></section>
+
+<section class="sec"><h3>Sensitive data is gated and logged</h3><span class="hint">Bank accounts, UANs and salaries are masked by default outside the screens that need them. Employees cannot silently edit their own bank details — they raise a correction request. Platform staff reach a tenant's granular data only through a time-boxed, reasoned support-access grant that appears in the audit log.</span>
+<div class="panel stack gap-3">
+  <div class="row gap-4 wrap"><div class="stack gap-1"><span class="cap">Masked</span><span class="num">XXXX XXXX 4417</span></div><div class="stack gap-1"><span class="cap">Revealed on demand</span><span class="num">5011 2298 4417</span></div><div class="stack gap-1"><span class="cap">Action</span><button class="btn btn-secondary btn-sm">Request correction</button></div></div>
+  <div class="alert alert-warning"><div><div class="alert-title">Support access \u00b7 expires in 23h 12m</div>Granted for ticket #4821. Every screen you open in this organization is recorded in its audit log.</div></div>
+</div></section>
+
+<section class="sec"><h3>Nothing blocks day one</h3><span class="hint">Registration asks only what a working account needs; statutory depth lives in settings. Optional-but-important data is surfaced later as attention items, not as required fields — a missing UAN is a badge on a row, not a blocked form.</span>
+<div class="panel stack gap-2">
+  <div class="row gap-3"><div class="progress" style="flex:1"><i style="width:40%"></i></div><span class="hint num">2 of 5 done</span></div>
+  <div class="row gap-2 wrap"><span class="badge badge-warning">UAN missing \u00b7 6</span><span class="badge badge-warning">Bank unverified \u00b7 3</span><span class="badge badge-danger">Overdue \u00b7 EPF challan</span></div>
+</div></section>
+</div></body></html>

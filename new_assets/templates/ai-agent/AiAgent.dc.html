@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="AI agent (command overlay)" description="Launcher pill plus a floating natural-language composer, intent preview and confirm-before-commit." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand"><svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>Emplora</div>
+<div style="padding:0 8px 10px;font-size:var(--text-xs);color:var(--color-text-subtle)">Acme Textiles Pvt Ltd</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Dashboard</a><a href="#" class="nav-item">Setup<span class="count">2/5</span></a></div>
+<div class="nav-group">People</div>
+<div class="stack gap-1"><a href="#" class="nav-item is-active">Employees<span class="count">248</span></a><a href="#" class="nav-item">Attendance</a><a href="#" class="nav-item">Leave requests<span class="count">12</span></a></div>
+<div class="nav-group">Payroll</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Payroll run</a><a href="#" class="nav-item">Payslips</a><a href="#" class="nav-item">Books</a><a href="#" class="nav-item">Reports</a></div>
+<div class="nav-group">Administration</div>
+<div class="stack gap-1"><a href="#" class="nav-item">Users</a><a href="#" class="nav-item">Roles</a><a href="#" class="nav-item">Billing</a><a href="#" class="nav-item">Organization settings</a></div>
+</aside>
+<main style="min-width:0">
+<div class="topbar"><div class="crumbs">People <span>/</span> <b>Employees</b></div><span class="grow"></span><input class="input" style="width:200px" placeholder="Search name, ID, UAN"><span class="avatar avatar-sm">PN</span></div>
+<div class="page" style="padding-bottom:120px">
+<div class="page-head"><div><div class="page-title">Employees</div><div class="page-sub">248 active · 12 on notice · 3 exited this cycle</div></div><div class="row gap-2"><button class="btn btn-secondary">Import Excel</button><button class="btn btn-primary">Add employee</button></div></div>
+
+<div class="card" style="margin-bottom:16px;border-color:var(--color-primary)">
+<div class="card-head"><div class="row gap-2"><svg viewBox="0 0 40 40" width="16" height="16"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg><div class="card-title">Proposed change · needs your approval</div></div><span class="badge badge-warning">Nothing saved yet</span></div>
+<div class="card-body">
+<div class="row gap-2" style="margin-bottom:16px;font-size:var(--text-sm)"><span class="hint">You asked</span><b>“Increase Rahul's salary to ₹75,000 from next month”</b></div>
+<div class="row gap-6 wrap" style="margin-bottom:18px">
+<div class="stack gap-1"><span class="kicker">Employee</span><div class="cell-person"><span class="avatar">RM</span><div class="who"><div class="nm">Rahul Menon</div><div class="sub">EMP-0129 · Production · one match found</div></div></div></div>
+<div class="stack gap-1"><span class="kicker">Effective from</span><span class="num" style="font-size:var(--text-md)">01 Sep 2026</span><span class="hint">Next cycle, not this one</span></div>
+<div class="stack gap-1"><span class="kicker">Approval</span><span style="font-size:var(--text-md)">You · OrgAdmin</span><span class="hint">Recorded on the audit log</span></div>
+</div>
+<table class="table" style="font-size:var(--text-sm)">
+<thead><tr><th>Component</th><th class="num">Current</th><th class="num">Proposed</th><th class="num">Change</th></tr></thead>
+<tbody>
+<tr><td>Basic</td><td class="num">₹31,000</td><td class="num">₹37,500</td><td class="num" style="color:var(--success-700)">+₹6,500</td></tr>
+<tr><td>House rent allowance</td><td class="num">₹12,400</td><td class="num">₹15,000</td><td class="num" style="color:var(--success-700)">+₹2,600</td></tr>
+<tr><td>Special allowance</td><td class="num">₹18,600</td><td class="num">₹22,500</td><td class="num" style="color:var(--success-700)">+₹3,900</td></tr>
+<tr><td>EPF employee <span class="hint">wage ceiling applies</span></td><td class="num">₹1,800</td><td class="num">₹1,800</td><td class="num muted">no change</td></tr>
+<tr><td>ESIC</td><td class="num">₹465</td><td class="num muted">—</td><td class="num" style="color:var(--warning-700)">above ceiling from Sep</td></tr>
+</tbody>
+<tr class="table-total"><td>Gross monthly</td><td class="num">₹62,000</td><td class="num">₹75,000</td><td class="num">+₹13,000</td></tr>
+</table>
+<div class="alert alert-warning" style="margin-top:16px"><div><div class="alert-title">Two knock-on effects</div>Rahul crosses the ESIC gross ceiling, so ESIC stops from September — his net rises by ₹465 more than the raise alone. Annual payroll cost increases by ₹1,56,000.</div></div>
+</div>
+<div class="card-foot row gap-2"><span class="hint">The agent drafted this from your sentence. It has changed nothing.</span><span class="grow"></span><button class="btn btn-ghost">Edit the numbers</button><button class="btn btn-secondary">Discard</button><button class="btn btn-primary">Approve &amp; schedule for 1 Sep</button></div>
+</div>
+
+<div class="table-wrap">
+<div class="table-toolbar"><input class="input" style="width:200px" placeholder="Search employees"><select class="select" style="width:150px"><option>All departments</option><option>Production</option></select><span class="grow"></span><span class="hint">Sorted by gross, high to low</span></div>
+<table class="table">
+<thead><tr><th>Employee</th><th>Department</th><th>Status</th><th class="num">Gross / mo</th><th>Last change</th></tr></thead>
+<tbody>
+<tr><td><div class="cell-person"><span class="avatar">AQ</span><div class="who"><div class="nm">Aisha Qureshi</div><div class="sub">EMP-0121 · Senior Engineer</div></div></div></td><td>Engineering</td><td><span class="badge badge-success">Active</span></td><td class="num">₹1,26,000</td><td class="hint">Apr 2026 · revision</td></tr>
+<tr class="is-selected"><td><div class="cell-person"><span class="avatar">RM</span><div class="who"><div class="nm">Rahul Menon</div><div class="sub">EMP-0129 · Line Supervisor</div></div></div></td><td>Production</td><td><span class="badge badge-success">Active</span></td><td class="num">₹62,000 <span class="hint">→ ₹75,000</span></td><td><span class="badge badge-info">Pending approval</span></td></tr>
+<tr><td><div class="cell-person"><span class="avatar">PN</span><div class="who"><div class="nm">Priya Nair</div><div class="sub">EMP-0104 · Finance Manager</div></div></div></td><td>Finance</td><td><span class="badge badge-success">Active</span></td><td class="num">₹78,000</td><td class="hint">Jan 2026 · revision</td></tr>
+<tr><td><div class="cell-person"><span class="avatar">RD</span><div class="who"><div class="nm">Rohit Deshmukh</div><div class="sub">EMP-0117 · Line Supervisor</div></div></div></td><td>Production</td><td><span class="badge badge-warning">On notice</span></td><td class="num">₹34,500</td><td class="hint">Jul 2026 · arrears</td></tr>
+</tbody>
+</table>
+<div class="table-foot"><span>Showing 4 of 263</span><div class="row gap-2"><button class="btn btn-secondary btn-sm">Previous</button><button class="btn btn-secondary btn-sm">Next</button></div></div>
+</div>
+</div>
+
+<div style="position:fixed;left:var(--nav-w);right:0;bottom:0;display:flex;justify-content:center;padding:0 24px 22px;z-index:12;pointer-events:none">
+<button class="btn" style="pointer-events:auto;height:44px;padding:0 20px 0 16px;gap:10px;border-radius:var(--radius-full);background:var(--color-surface);border:1px solid var(--color-border-strong);box-shadow:var(--shadow-lg);font-size:var(--text-sm);color:var(--color-text-muted)">
+<svg viewBox="0 0 40 40" width="18" height="18" style="flex:none"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>
+Ask Emplora<span class="num" style="font-size:var(--text-2xs);padding:2px 6px;border-radius:4px;background:var(--color-surface-inset);color:var(--color-text-subtle)">Ctrl K</span>
+</button>
+</div>
+
+<div style="position:fixed;inset:0;z-index:40;background:rgb(14 17 23 / .32);backdrop-filter:blur(2px);display:flex;align-items:flex-end;justify-content:center;padding:0 24px 24px">
+<div style="width:min(720px,100%)">
+<div class="card" style="margin-bottom:10px;box-shadow:var(--shadow-lg)">
+<div class="card-body" style="padding:14px 16px">
+<div class="row gap-2" style="align-items:flex-start">
+<svg viewBox="0 0 40 40" width="20" height="20" style="flex:none;margin-top:4px"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg>
+<div style="flex:1;min-width:0">
+<textarea class="textarea" style="border:0;box-shadow:none;padding:2px 0;min-height:52px;font-size:var(--text-md);resize:none" placeholder="Ask anything — “Calculate payroll for this month”">Show me employees whose salary changed this month</textarea>
+</div>
+</div>
+<div class="row gap-2" style="margin-top:6px">
+<button class="btn btn-ghost btn-sm btn-icon" aria-label="Attach a file">+</button>
+<button class="btn btn-ghost btn-sm" aria-label="Attach Excel">Excel</button>
+<button class="btn btn-ghost btn-sm" aria-label="Paste a table">Paste table</button>
+<span class="grow"></span>
+<span class="hint">Reads only what your role can see</span>
+<button class="btn btn-ghost btn-sm btn-icon" aria-label="Dictate">◍</button>
+<button class="btn btn-primary btn-sm btn-icon" aria-label="Send">↑</button>
+</div>
+</div>
+</div>
+<div class="card" style="box-shadow:var(--shadow-lg);overflow:hidden">
+<div class="card-head" style="padding:10px 16px"><span class="kicker">Try</span><span class="hint">Enter to send · Esc to close</span></div>
+<div class="stack">
+<button class="nav-item" style="height:38px;border-radius:0;padding:0 16px;justify-content:flex-start;font-size:var(--text-sm)"><span style="flex:1;text-align:left">Add these 30 employees from this Excel</span><span class="badge badge-info badge-plain">Preview 30 rows</span></button>
+<button class="nav-item" style="height:38px;border-radius:0;padding:0 16px;justify-content:flex-start;font-size:var(--text-sm)"><span style="flex:1;text-align:left">Calculate payroll for this month</span><span class="badge badge-info badge-plain">Preview totals</span></button>
+<button class="nav-item" style="height:38px;border-radius:0;padding:0 16px;justify-content:flex-start;font-size:var(--text-sm)"><span style="flex:1;text-align:left">Increase Rahul's salary to ₹75,000 from next month</span><span class="badge badge-info badge-plain">Preview change</span></button>
+<button class="nav-item" style="height:38px;border-radius:0;padding:0 16px;justify-content:flex-start;font-size:var(--text-sm)"><span style="flex:1;text-align:left">Why is this employee's salary different from last month?</span><span class="badge badge-neutral badge-plain">Answer only</span></button>
+<button class="nav-item" style="height:38px;border-radius:0;padding:0 16px;justify-content:flex-start;font-size:var(--text-sm)"><span style="flex:1;text-align:left">Generate the payroll report for March</span><span class="badge badge-neutral badge-plain">Download</span></button>
+<button class="nav-item" style="height:38px;border-radius:0;padding:0 16px;justify-content:flex-start;font-size:var(--text-sm)"><span style="flex:1;text-align:left">Show me employees whose salary changed this month</span><span class="badge badge-neutral badge-plain">Answer only</span></button>
+</div>
+<div class="card-foot row gap-3"><span class="hint">Answers appear inline. Anything that writes data opens a preview you approve — the agent never approves a payroll run or moves money.</span></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  apply(){ document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light'); }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

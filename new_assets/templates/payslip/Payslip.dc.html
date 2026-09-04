@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Payslip document" description="Pay statement in the A − B − C + D form: earnings, contributions, deductions, reimbursements, net in words." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="min-height:100vh;background:var(--color-canvas);padding:32px 24px">
+<div style="max-width:800px;margin:0 auto">
+<div class="row gap-2" style="margin-bottom:16px"><div><div class="page-title">Payslip · August 2026</div><div class="page-sub">Abhinav Jha · TSF0080 · generated 31 Aug 2026</div></div><span class="grow" style="flex:1"></span><span class="badge badge-success">Sent</span><button class="btn btn-secondary">Send by email</button><button class="btn btn-primary">Download PDF</button></div>
+<div class="card" style="padding:0;overflow:hidden">
+<div style="padding:28px 36px;border-bottom:1px solid var(--color-border);display:flex;align-items:flex-start;gap:24px">
+<div style="flex:1"><div class="row gap-2" style="margin-bottom:8px"><span class="brand-mark" style="width:26px;height:26px">T</span><b style="font-size:var(--text-md)">Trusave Fintech Private Limited</b></div><div class="hint">E-101, Plot No. 19-A, Sanmati CGHS, Sector-6, Dwarka<br>New Delhi, Delhi 110075</div></div>
+<div style="text-align:right"><div class="kicker">Payslip</div><div class="num" style="font-size:var(--text-xl);font-weight:500">August 2026</div><div class="hint">Pay date 31 Aug 2026 · INR</div></div>
+</div>
+<div style="padding:22px 36px;border-bottom:1px solid var(--color-border);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 24px">
+<div class="stack gap-1"><span class="kicker">Employee</span><span style="font-size:var(--text-sm);font-weight:500">Abhinav Jha</span><span class="hint num">TSF0080</span></div>
+<div class="stack gap-1"><span class="kicker">Designation</span><span style="font-size:var(--text-sm)">Software Developer</span><span class="hint">Engineering</span></div>
+<div class="stack gap-1"><span class="kicker">Date joined</span><span class="num" style="font-size:var(--text-sm)">01 Jun 2026</span><span class="hint">Bank transfer</span></div>
+<div class="stack gap-1"><span class="kicker">Bank</span><span class="num" style="font-size:var(--text-sm)">XXXX XXXX 7051</span><span class="hint num">SBIN0001679 · SBI</span></div>
+</div>
+<div style="padding:18px 36px;border-bottom:1px solid var(--color-border);background:var(--color-surface-2);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px">
+<div class="stack gap-1"><span class="kicker">Total working days</span><span class="num" style="font-size:var(--text-md)">31.0</span></div>
+<div class="stack gap-1"><span class="kicker">Actual payable days</span><span class="num" style="font-size:var(--text-md)">31.0</span></div>
+<div class="stack gap-1"><span class="kicker">Loss of pay days</span><span class="num" style="font-size:var(--text-md)">0.00</span></div>
+<div class="stack gap-1"><span class="kicker">Days payable</span><span class="num" style="font-size:var(--text-md)">31</span></div>
+</div>
+<div style="padding:8px 36px 0">
+<table class="table" style="font-size:var(--text-sm)">
+<thead><tr><th colspan="2" style="background:transparent;border-bottom:1px solid var(--color-border);padding-left:0">Earnings</th><th class="num" style="background:transparent;border-bottom:1px solid var(--color-border);padding-right:0">Amount</th></tr></thead>
+<tbody>
+<tr><td colspan="2" style="padding-left:0">Basic</td><td class="num" style="padding-right:0">56,250.00</td></tr>
+<tr><td colspan="2" style="padding-left:0">House rent allowance</td><td class="num" style="padding-right:0">22,500.00</td></tr>
+<tr><td colspan="2" style="padding-left:0">Special allowance</td><td class="num" style="padding-right:0">27,083.00</td></tr>
+<tr><td colspan="2" style="padding-left:0">Meal card (Pluxee)</td><td class="num" style="padding-right:0">6,667.00</td></tr>
+<tr class="table-total"><td colspan="2" style="padding-left:0;background:transparent">Total earnings <span class="badge badge-info badge-plain badge-square" style="margin-left:6px">A</span></td><td class="num" style="padding-right:0;background:transparent">₹1,12,500.00</td></tr>
+</tbody>
+</table>
+<table class="table" style="font-size:var(--text-sm);margin-top:18px">
+<thead><tr><th colspan="2" style="background:transparent;border-bottom:1px solid var(--color-border);padding-left:0">Contributions</th><th class="num" style="background:transparent;border-bottom:1px solid var(--color-border);padding-right:0">Amount</th></tr></thead>
+<tbody>
+<tr><td colspan="2" style="padding-left:0">PF employee<span class="hint" style="margin-left:8px">UAN 101234567890</span></td><td class="num" style="padding-right:0">1,800.00</td></tr>
+<tr class="table-total"><td colspan="2" style="padding-left:0;background:transparent">Total contributions <span class="badge badge-info badge-plain badge-square" style="margin-left:6px">B</span></td><td class="num" style="padding-right:0;background:transparent">₹1,800.00</td></tr>
+</tbody>
+</table>
+<table class="table" style="font-size:var(--text-sm);margin-top:18px">
+<thead><tr><th colspan="2" style="background:transparent;border-bottom:1px solid var(--color-border);padding-left:0">Taxes &amp; deductions</th><th class="num" style="background:transparent;border-bottom:1px solid var(--color-border);padding-right:0">Amount</th></tr></thead>
+<tbody>
+<tr><td colspan="2" style="padding-left:0">Deduction — meal card (Pluxee)</td><td class="num" style="padding-right:0">6,667.00</td></tr>
+<tr><td colspan="2" style="padding-left:0">TDS</td><td class="num muted" style="padding-right:0">—</td></tr>
+<tr><td colspan="2" style="padding-left:0">Professional tax</td><td class="num muted" style="padding-right:0">—</td></tr>
+<tr class="table-total"><td colspan="2" style="padding-left:0;background:transparent">Total taxes &amp; deductions <span class="badge badge-info badge-plain badge-square" style="margin-left:6px">C</span></td><td class="num" style="padding-right:0;background:transparent">₹6,667.00</td></tr>
+</tbody>
+</table>
+<table class="table" style="font-size:var(--text-sm);margin-top:18px">
+<thead><tr><th colspan="2" style="background:transparent;border-bottom:1px solid var(--color-border);padding-left:0">Reimbursements</th><th class="num" style="background:transparent;border-bottom:1px solid var(--color-border);padding-right:0">Amount</th></tr></thead>
+<tbody>
+<tr><td colspan="2" style="padding-left:0">Other expense<span class="hint" style="margin-left:8px">Claim #4821, approved 26 Aug</span></td><td class="num" style="padding-right:0">1,999.00</td></tr>
+<tr class="table-total"><td colspan="2" style="padding-left:0;background:transparent">Total reimbursements <span class="badge badge-info badge-plain badge-square" style="margin-left:6px">D</span></td><td class="num" style="padding-right:0;background:transparent">₹1,999.00</td></tr>
+</tbody>
+</table>
+</div>
+<div style="margin:24px 36px 0;padding:20px;background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-sm)">
+<div class="row gap-4 wrap" style="margin-bottom:14px;font-size:var(--text-sm)">
+<span class="num">A 1,12,500.00</span><span class="muted">−</span><span class="num">B 1,800.00</span><span class="muted">−</span><span class="num">C 6,667.00</span><span class="muted">+</span><span class="num">D 1,999.00</span>
+</div>
+<div class="row gap-4" style="align-items:flex-end"><div style="flex:1"><div class="kicker">Net salary payable (A − B − C + D)</div><div class="hint">One lakh six thousand and thirty two rupees only</div></div><div class="num" style="font-size:var(--text-3xl);font-weight:500;letter-spacing:-.03em;white-space:nowrap">₹1,06,032.00</div></div>
+</div>
+<div style="padding:20px 36px 28px">
+<div class="kicker" style="margin-bottom:10px">Employer contributions · not deducted from your pay</div>
+<div class="row gap-6 wrap" style="font-size:var(--text-sm)">
+<div class="stack gap-1"><span class="hint">PF employer</span><span class="num">₹1,800.00</span></div>
+<div class="stack gap-1"><span class="hint">EPS</span><span class="num">₹1,250.00</span></div>
+<div class="stack gap-1"><span class="hint">ESIC employer</span><span class="num muted">—</span></div>
+<div class="stack gap-1"><span class="hint">Leave balance</span><span class="num">14.5 days</span></div>
+<div class="stack gap-1"><span class="hint">Financial year</span><span class="num">2026–27</span></div>
+</div>
+<p class="hint" style="margin:20px 0 0;padding-top:16px;border-top:1px solid var(--color-border)">All amounts are in INR. Computer-generated statement — no signature required. Raise a correction request from My Profile if any detail is wrong; bank details can only be changed by HR.</p>
+</div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:1300}}">
+class Component extends DCLogic {
+  apply(){ document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light'); }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Landing page" description="Public homepage: AI-first positioning, product proof, accounting module, tiered pricing, signup CTAs." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="background:var(--color-surface)">
+<header style="position:sticky;top:0;z-index:20;background:var(--color-surface);border-bottom:1px solid var(--color-border)">
+<div style="max-width:1160px;margin:0 auto;padding:0 32px;height:60px;display:flex;align-items:center;gap:28px">
+<a href="#" style="border:0;display:flex;align-items:center;gap:9px;color:var(--color-text)"><svg class="mark" viewBox="0 0 40 40" width="24" height="24" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg><span style="font-weight:600;letter-spacing:-.03em;font-size:var(--text-lg)">Emplora</span></a>
+<nav class="row gap-5" style="font-size:var(--text-sm)"><a href="#product" class="muted" style="border:0">Product</a><a href="#ai" class="muted" style="border:0">AI agent</a><a href="#books" class="muted" style="border:0">Books &amp; compliance</a><a href="#pricing" class="muted" style="border:0">Pricing</a></nav>
+<span style="flex:1"></span>
+<a href="#" class="btn btn-ghost" style="border-bottom:0">Sign in</a>
+<a href="#" class="btn btn-primary" style="border-bottom:0">Start free</a>
+</div>
+</header>
+
+<section style="max-width:1160px;margin:0 auto;padding:80px 32px 0">
+<div style="max-width:760px">
+<span class="badge badge-info" style="margin-bottom:20px">AI payroll for Indian businesses</span>
+<h1 style="font-size:clamp(38px,5vw,60px);line-height:1.04;letter-spacing:-.035em;margin-bottom:20px">Payroll, attendance and books.<br>Run by an agent, checked by you.</h1>
+<p style="font-size:var(--text-lg);color:var(--color-text-muted);max-width:60ch;margin-bottom:28px">Paste your employee register and Emplora reads it, maps it and creates every record. Ask for a payroll run in plain words. EPF, ESIC, PT and TDS are computed, explained and filed on time — with a journal your accountant can actually use. No implementation project, no training week.</p>
+<div class="row gap-3 wrap" style="margin-bottom:16px"><a href="#" class="btn btn-primary btn-lg" style="border-bottom:0">Start free — 14 days</a><a href="#" class="btn btn-secondary btn-lg" style="border-bottom:0">Book a 20-minute demo</a></div>
+<div class="row gap-4 wrap"><span class="hint">No card required</span><span class="hint">Up to 10 employees free, forever</span><span class="hint">Data stays in India</span></div>
+</div>
+<div style="margin-top:56px;border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface-2);padding:14px;box-shadow:var(--shadow-md)">
+<div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface)">
+<div style="height:34px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:8px;padding:0 14px"><span style="width:8px;height:8px;border-radius:50%;background:var(--neutral-300)"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--neutral-300)"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--neutral-300)"></span><span class="hint num" style="margin-left:8px">app.emplora.in/payroll/august-2026</span></div>
+<svg viewBox="0 0 1160 520" style="display:block;width:100%;height:auto;background:var(--color-surface-2)"><defs><pattern id="st" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="4" height="8" fill="var(--neutral-200)"/></pattern></defs><rect width="1160" height="520" fill="url(#st)" opacity=".7"/><rect x="0" y="0" width="1160" height="520" fill="none"/><text x="580" y="266" text-anchor="middle" font-family="var(--font-mono)" font-size="15" fill="var(--color-text-muted)">product screenshot — payroll run, review step</text></svg>
+</div>
+</div>
+<div class="row gap-8 wrap" style="margin-top:36px;justify-content:space-between">
+<div class="stack gap-1"><span class="num" style="font-size:var(--text-2xl);font-weight:600">4 min</span><span class="hint">Median time to import a 200-person register</span></div>
+<div class="stack gap-1"><span class="num" style="font-size:var(--text-2xl);font-weight:600">₹0</span><span class="hint">Spent on implementation consultants</span></div>
+<div class="stack gap-1"><span class="num" style="font-size:var(--text-2xl);font-weight:600">31</span><span class="hint">Statutory forms and challans generated for you</span></div>
+<div class="stack gap-1"><span class="num" style="font-size:var(--text-2xl);font-weight:600">1</span><span class="hint">System for payroll, attendance and books</span></div>
+</div>
+</section>
+<section id="ai" style="margin-top:96px;background:var(--color-canvas);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)">
+<div style="max-width:1160px;margin:0 auto;padding:72px 32px">
+<div style="max-width:640px;margin-bottom:36px"><span class="kicker">The agent</span><h2 style="font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em;margin:8px 0 14px">Type it. Paste it. It's done.</h2><p style="color:var(--color-text-muted);font-size:var(--text-md)">One command bar sits at the bottom of every screen. Admins use it to load data and run cycles; employees use it to ask about their own pay. It always shows you what it is about to change, and nothing is written until you approve.</p></div>
+<div class="split">
+<div class="card" style="overflow:hidden">
+<div class="card-head"><div class="row gap-2"><svg viewBox="0 0 40 40" width="16" height="16"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg><b style="font-size:var(--text-sm)">Emplora agent</b></div><span class="badge badge-neutral badge-plain">Preview before commit</span></div>
+<div class="card-body stack gap-3" style="background:var(--color-surface-2)">
+<div class="row gap-2" style="justify-content:flex-end"><div style="max-width:70%;padding:10px 14px;background:var(--color-primary);color:#fff;border-radius:12px 12px 3px 12px;font-size:var(--text-sm)">Here's our register — 248 people. Set them all up.<div style="margin-top:8px;padding:8px 10px;background:rgb(255 255 255 / .16);border-radius:6px;display:flex;align-items:center;gap:8px"><span class="num" style="font-size:var(--text-xs)">acme-salary-register.xlsx</span><span style="opacity:.75;font-size:var(--text-2xs)">184 KB</span></div></div></div>
+<div style="max-width:78%;padding:12px 14px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px 12px 12px 3px;font-size:var(--text-sm)">
+<div style="margin-bottom:10px">I found 248 rows and 14 columns. Nine columns map cleanly; three need a decision from you.</div>
+<div class="stack gap-2" style="font-size:var(--text-xs)">
+<div class="row gap-2"><span class="badge badge-success">Mapped</span><span class="num muted">"Emp Code" → Employee ID · "DOJ" → Date of joining · "CTC/mo" → Gross</span></div>
+<div class="row gap-2"><span class="badge badge-warning">Ambiguous</span><span class="num muted">"A/C No." → Bank account or UAN?</span></div>
+<div class="row gap-2"><span class="badge badge-danger">6 rows</span><span class="num muted">IFSC fails format check — I can fix 4 from the branch name</span></div>
+</div>
+<div class="row gap-2 wrap" style="margin-top:12px"><button class="btn btn-primary btn-sm">Review the 248 rows</button><button class="btn btn-secondary btn-sm">It's a bank account</button><button class="btn btn-ghost btn-sm">Show the 6 errors</button></div>
+</div>
+<div class="input-affix" style="margin-top:6px;background:var(--color-surface)"><span class="affix">›</span><input class="input" placeholder="Ask anything, or paste a table…"><button class="btn btn-primary btn-sm" style="margin-right:6px">Send</button></div>
+<div class="row gap-2 wrap"><span class="badge badge-outline badge-plain">Run August payroll</span><span class="badge badge-outline badge-plain">Who is missing bank details?</span><span class="badge badge-outline badge-plain">Explain Rohit's TDS</span><span class="badge badge-outline badge-plain">Post last month's journal</span></div>
+</div>
+</div>
+<div class="stack gap-4">
+<div class="card card-pad stack gap-2"><b style="font-size:var(--text-sm)">Import anything</b><span class="hint">Excel, CSV, a screenshot of a register, or text pasted straight out of WhatsApp. Column order and header wording do not matter.</span></div>
+<div class="card card-pad stack gap-2"><b style="font-size:var(--text-sm)">Explains its arithmetic</b><span class="hint">Every figure can be opened line by line: which slab, which ceiling, which override and who approved it. Auditors get a trail, not a black box.</span></div>
+<div class="card card-pad stack gap-2"><b style="font-size:var(--text-sm)">Employees ask too</b><span class="hint">"How much leave do I have?", "Why is this month lower?", "Send me April's payslip." Scoped to their own records, always.</span></div>
+<div class="alert alert-warning"><div><div class="alert-title">It never pays anyone on its own</div>Approving a run, editing a salary or changing a role stays a human action with a name against it.</div></div>
+</div>
+</div>
+</div>
+</section>
+<section id="product" style="max-width:1160px;margin:0 auto;padding:80px 32px 0">
+<div style="max-width:640px;margin-bottom:36px"><span class="kicker">The product</span><h2 style="font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em;margin:8px 0 14px">Everything a payroll month needs</h2><p style="color:var(--color-text-muted);font-size:var(--text-md)">Built for Indian statutory reality first: EPF, ESIC, professional tax by state, TDS regimes, LOP on calendar or working days, mid-month joiners and full-and-final settlements.</p></div>
+<div class="grid-3 gap-4">
+<div class="card card-pad stack gap-2"><b>Employees &amp; onboarding</b><span class="hint">One register with statutory readiness on every row — UAN, ESIC, bank verification — so nothing blocks the run on the 30th.</span></div>
+<div class="card card-pad stack gap-2"><b>Attendance &amp; leave</b><span class="hint">Monthly grid, bulk Excel import with a validation preview, leave types with carry-forward, holiday calendars per location.</span></div>
+<div class="card card-pad stack gap-2"><b>Payroll run</b><span class="hint">Three steps: lock attendance, review and adjust with a reason on every override, approve and generate. Totals recompute as you edit.</span></div>
+<div class="card card-pad stack gap-2"><b>Payslips</b><span class="hint">A − B − C + D statements with the amount in words, emailed or downloaded, and a self-service history for every employee.</span></div>
+<div class="card card-pad stack gap-2"><b>Reports &amp; filings</b><span class="hint">Salary register, EPF and ESIC contribution files, PT, OT, joining and exit, and a bank transfer file your bank will accept.</span></div>
+<div class="card card-pad stack gap-2"><b>Roles you define</b><span class="hint">Not a fixed four. Clone HR into "Regional HR — Production", grant nine permissions out of twenty-four, and see how many people it affects before you save.</span></div>
+</div>
+</section>
+
+<section id="books" style="margin-top:88px;background:var(--neutral-900);color:var(--neutral-100)">
+<div style="max-width:1160px;margin:0 auto;padding:76px 32px">
+<div class="split">
+<div>
+<span class="kicker" style="color:var(--primary-300)">Books &amp; compliance</span>
+<h2 style="font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em;margin:8px 0 16px;color:#fff">You may not need a second accounting package</h2>
+<p style="color:var(--neutral-400);font-size:var(--text-md);max-width:56ch">Most small businesses buy payroll and then buy desktop accounting software to post it. Emplora keeps the ledger where the payroll already is: every approved run posts a double-entry journal, GST-ready expense claims, TDS liabilities and challan-ready summaries — exportable to Tally or Busy if your CA still wants them, and printable if the assessing officer does.</p>
+<div class="stack gap-3" style="margin-top:24px">
+<div class="row gap-3"><span class="badge badge-success">Included</span><span style="font-size:var(--text-sm);color:var(--neutral-300)">Auto journal per run — salaries payable, statutory dues, employer contributions</span></div>
+<div class="row gap-3"><span class="badge badge-success">Included</span><span style="font-size:var(--text-sm);color:var(--neutral-300)">Ledgers, trial balance and month close for payroll accounts</span></div>
+<div class="row gap-3"><span class="badge badge-success">Included</span><span style="font-size:var(--text-sm);color:var(--neutral-300)">Expense claims and reimbursements with GST fields</span></div>
+<div class="row gap-3"><span class="badge badge-info">Export</span><span style="font-size:var(--text-sm);color:var(--neutral-300)">Tally XML, Busy-compatible CSV, and plain Excel for anyone else</span></div>
+</div>
+<a href="#" class="btn btn-primary" style="margin-top:26px;border-bottom:0">See the books module</a>
+</div>
+<div class="card on-dark">
+<div class="card-head"><div class="card-title" style="color:#fff">Journal · August 2026 run</div><span class="badge badge-success">Posted</span></div>
+<table class="table">
+<thead><tr><th>Account</th><th class="num">Debit</th><th class="num">Credit</th></tr></thead>
+<tbody>
+<tr><td>Salaries &amp; wages</td><td class="num">1,34,60,800</td><td class="num muted">—</td></tr>
+<tr><td>Employer EPF</td><td class="num">4,46,400</td><td class="num muted">—</td></tr>
+<tr><td>Salaries payable</td><td class="num muted">—</td><td class="num">1,18,42,300</td></tr>
+<tr><td>Statutory dues payable</td><td class="num muted">—</td><td class="num">20,64,900</td></tr>
+</tbody>
+<tr class="table-total"><td>Balanced</td><td class="num">1,39,07,200</td><td class="num">1,39,07,200</td></tr>
+</table>
+<div class="card-foot"><span class="hint">Posted automatically on approval · reversible until month close</span></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pricing" style="max-width:1160px;margin:0 auto;padding:84px 32px 0">
+<div style="max-width:640px;margin-bottom:36px"><span class="kicker">Pricing</span><h2 style="font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em;margin:8px 0 14px">Per employee, per month. Nothing to install.</h2><p style="color:var(--color-text-muted);font-size:var(--text-md)">Billed annually or monthly, GST extra. Every plan includes unlimited payroll runs, all statutory reports and the employee self-service app — plans differ on the agent, the books module and how much control you get over roles.</p></div>
+<div class="grid-4 gap-4" style="align-items:stretch">
+<div class="card card-pad stack gap-3">
+<div><b>Starter</b><div class="hint">Up to 10 employees</div></div>
+<div class="row" style="align-items:flex-end;gap:6px"><span class="num" style="font-size:var(--text-3xl);font-weight:600;letter-spacing:-.03em">₹0</span><span class="hint" style="padding-bottom:6px">forever</span></div>
+<a href="#" class="btn btn-secondary btn-block" style="border-bottom:0">Start free</a>
+<div class="stack gap-2" style="font-size:var(--text-sm);margin-top:4px">
+<span>Payroll, payslips, attendance</span><span>All statutory reports</span><span>Employee self-service</span><span class="muted">AI import — 2 files / month</span><span class="muted">System roles only</span>
+</div>
+</div>
+<div class="card card-pad stack gap-3">
+<div><b>Growth</b><div class="hint">11–200 employees</div></div>
+<div class="row" style="align-items:flex-end;gap:6px"><span class="num" style="font-size:var(--text-3xl);font-weight:600;letter-spacing:-.03em">₹49</span><span class="hint" style="padding-bottom:6px">/ employee / month</span></div>
+<a href="#" class="btn btn-secondary btn-block" style="border-bottom:0">Start 14-day trial</a>
+<div class="stack gap-2" style="font-size:var(--text-sm);margin-top:4px">
+<span>Everything in Starter</span><span>Unlimited AI import &amp; commands</span><span>Custom roles &amp; permissions</span><span>Bank transfer files</span><span class="muted">Books module — read only</span>
+</div>
+</div>
+<div class="card card-pad stack gap-3" style="border-color:var(--color-primary);box-shadow:var(--shadow-md);position:relative">
+<span class="badge badge-info" style="position:absolute;top:-10px;left:20px">Most chosen</span>
+<div><b>Books</b><div class="hint">Payroll + accounting, 11–500 employees</div></div>
+<div class="row" style="align-items:flex-end;gap:6px"><span class="num" style="font-size:var(--text-3xl);font-weight:600;letter-spacing:-.03em">₹79</span><span class="hint" style="padding-bottom:6px">/ employee / month</span></div>
+<a href="#" class="btn btn-primary btn-block" style="border-bottom:0">Start 14-day trial</a>
+<div class="stack gap-2" style="font-size:var(--text-sm);margin-top:4px">
+<span>Everything in Growth</span><span>Full books: journal, ledgers, month close</span><span>GST-ready expense claims</span><span>Tally / Busy export</span><span>Agent explains every figure</span>
+</div>
+</div>
+<div class="card card-pad stack gap-3">
+<div><b>Enterprise</b><div class="hint">500+ employees, multi-entity</div></div>
+<div class="row" style="align-items:flex-end;gap:6px"><span class="num" style="font-size:var(--text-2xl);font-weight:600;letter-spacing:-.03em">Talk to us</span></div>
+<a href="#" class="btn btn-secondary btn-block" style="border-bottom:0">Contact sales</a>
+<div class="stack gap-2" style="font-size:var(--text-sm);margin-top:4px">
+<span>Everything in Books</span><span>Multiple entities, one console</span><span>SSO and audit export</span><span>Custom statutory templates</span><span>Named implementation contact</span>
+</div>
+</div>
+</div>
+<div class="row gap-4 wrap" style="margin-top:20px"><span class="hint">Employee count is billed on the register at the start of each cycle.</span><span class="hint">Exits stop billing the next cycle.</span><span class="hint">Annual billing saves two months.</span></div>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:72px 32px 0">
+<div class="grid-3 gap-4">
+<div class="card card-pad stack gap-2"><b style="font-size:var(--text-sm)">Is my data safe with an AI agent?</b><span class="hint">The agent reads only what your role can already see, and every write it proposes needs your approval. Salary and bank data are encrypted, and platform staff cannot browse your payroll — support access is time-boxed, reasoned and written to your audit log.</span></div>
+<div class="card card-pad stack gap-2"><b style="font-size:var(--text-sm)">Do I have to leave Tally or Busy?</b><span class="hint">No. Keep them and take the export, or move payroll accounting into Emplora and let your CA pull the journal at quarter end. Most teams start with the export and stop using it after two cycles.</span></div>
+<div class="card card-pad stack gap-2"><b style="font-size:var(--text-sm)">How long does setup take?</b><span class="hint">Registration is five short steps, and the register import is one paste. Statutory depth — TDS regime, PT states, weekly offs — is filled in later from settings and never blocks your first run.</span></div>
+</div>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:72px 32px 88px">
+<div class="card" style="background:var(--color-primary);border-color:var(--primary-600);padding:48px;text-align:center">
+<h2 style="color:#fff;font-size:clamp(26px,3vw,36px);letter-spacing:-.03em;margin-bottom:12px">Your next payroll can be the easy one</h2>
+<p style="color:var(--primary-100);max-width:52ch;margin:0 auto 24px">Free for up to ten employees. Paste your register and see your first run in the time it takes to make tea.</p>
+<div class="row gap-3" style="justify-content:center"><a href="#" class="btn btn-lg" style="background:#fff;border-color:#fff;color:var(--primary-700);border-bottom:0">Start free</a><a href="#" class="btn btn-lg btn-ghost" style="color:#fff;border-bottom:0">Book a demo</a></div>
+</div>
+</section>
+<footer style="border-top:1px solid var(--color-border);background:var(--color-surface-2)">
+<div style="max-width:1160px;margin:0 auto;padding:44px 32px">
+<div class="grid-4 gap-6">
+<div class="stack gap-3"><a href="#" style="border:0;display:flex;align-items:center;gap:9px;color:var(--color-text)"><svg class="mark" viewBox="0 0 40 40" width="22" height="22" role="img" aria-label="Emplora"><path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="var(--color-primary)" stroke-width="5.4" stroke-linecap="round"/></svg><span style="font-weight:600;letter-spacing:-.03em">Emplora</span></a><span class="hint">AI payroll, attendance and books for Indian businesses.</span></div>
+<div class="stack gap-2" style="font-size:var(--text-sm)"><span class="kicker">Product</span><a href="#product" class="muted" style="border:0">Payroll</a><a href="#ai" class="muted" style="border:0">AI agent</a><a href="#books" class="muted" style="border:0">Books &amp; compliance</a><a href="#pricing" class="muted" style="border:0">Pricing</a></div>
+<div class="stack gap-2" style="font-size:var(--text-sm)"><span class="kicker">Company</span><a href="#" class="muted" style="border:0">About</a><a href="#" class="muted" style="border:0">Security</a><a href="#" class="muted" style="border:0">Status</a><a href="#" class="muted" style="border:0">Contact</a></div>
+<div class="stack gap-2" style="font-size:var(--text-sm)"><span class="kicker">Get started</span><a href="#" class="btn btn-primary btn-sm" style="border-bottom:0;width:fit-content">Start free</a><a href="#" class="muted" style="border:0">Sign in</a><a href="#" class="muted" style="border:0">Register your company</a></div>
+</div>
+<div class="row gap-4 wrap" style="margin-top:32px;padding-top:20px;border-top:1px solid var(--color-border)"><span class="hint">© 2026 Emplora</span><span class="hint">Terms</span><span class="hint">Privacy</span><span style="flex:1"></span><span class="hint num">Made for payroll teams in India</span></div>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1400}}">
+class Component extends DCLogic {
+  apply(){ document.documentElement.setAttribute('data-theme', this.props.theme === 'dark' ? 'dark' : 'light'); }
+  componentDidMount(){ this.apply(); }
+  componentDidUpdate(){ this.apply(); }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

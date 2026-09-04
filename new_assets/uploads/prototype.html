@@ -1,0 +1,768 @@
+<title>Meridian Payroll — Product Prototype</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root{
+    --ink:#151a21;
+    --slate:#4a5568;
+    --muted:#7b8494;
+    --paper:#f4f6f8;
+    --surface:#ffffff;
+    --surface-2:#eef1f4;
+    --border:#e1e5eb;
+    --accent:#155e63;
+    --accent-ink:#0e4448;
+    --accent-soft:#e4eeee;
+    --accent-contrast:#ffffff;
+    --success:#2f8f5b;
+    --success-soft:#e4f3ea;
+    --warning:#b3791f;
+    --warning-soft:#faf0dd;
+    --critical:#bd4038;
+    --critical-soft:#fbe8e6;
+    --focus:#155e63;
+    --shadow: 0 1px 2px rgba(21,26,33,0.06), 0 4px 12px rgba(21,26,33,0.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ink:#eef1f4;
+      --slate:#c2c9d2;
+      --muted:#8b93a1;
+      --paper:#10141a;
+      --surface:#171d25;
+      --surface-2:#1e252f;
+      --border:#2b323d;
+      --accent:#3fa7ac;
+      --accent-ink:#bfe6e8;
+      --accent-soft:#1c3436;
+      --accent-contrast:#0b1416;
+      --success:#59b884;
+      --success-soft:#173226;
+      --warning:#dba24d;
+      --warning-soft:#332812;
+      --critical:#e2726a;
+      --critical-soft:#3a1e1c;
+      --focus:#3fa7ac;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#eef1f4; --slate:#c2c9d2; --muted:#8b93a1; --paper:#10141a; --surface:#171d25;
+    --surface-2:#1e252f; --border:#2b323d; --accent:#3fa7ac; --accent-ink:#bfe6e8;
+    --accent-soft:#1c3436; --accent-contrast:#0b1416; --success:#59b884; --success-soft:#173226;
+    --warning:#dba24d; --warning-soft:#332812; --critical:#e2726a; --critical-soft:#3a1e1c; --focus:#3fa7ac;
+  }
+  :root[data-theme="light"]{
+    --ink:#151a21; --slate:#4a5568; --muted:#7b8494; --paper:#f4f6f8; --surface:#ffffff;
+    --surface-2:#eef1f4; --border:#e1e5eb; --accent:#155e63; --accent-ink:#0e4448;
+    --accent-soft:#e4eeee; --accent-contrast:#ffffff; --success:#2f8f5b; --success-soft:#e4f3ea;
+    --warning:#b3791f; --warning-soft:#faf0dd; --critical:#bd4038; --critical-soft:#fbe8e6; --focus:#155e63;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:14px;
+    line-height:1.5;
+    overflow:hidden;
+  }
+  .num{
+    font-family:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono","Consolas",monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
+
+  .shell{
+    display:grid;
+    grid-template-columns:240px 1fr;
+    grid-template-rows:56px 1fr;
+    grid-template-areas:
+      "sidebar topbar"
+      "sidebar main";
+    height:100vh;
+  }
+
+  /* Sidebar */
+  .sidebar{
+    grid-area:sidebar;
+    background:var(--surface);
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+  }
+  .org-switch{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 16px;
+    border-bottom:1px solid var(--border);
+  }
+  .org-mark{
+    width:30px;height:30px;border-radius:7px;
+    background:var(--accent);
+    color:var(--accent-contrast);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:13px;flex:none;
+  }
+  .org-name{font-weight:600;font-size:13px;color:var(--ink);line-height:1.25;}
+  .org-fy{font-size:11.5px;color:var(--muted);}
+
+  nav.primary{padding:10px 8px;display:flex;flex-direction:column;gap:2px;flex:1;overflow-y:auto;}
+  .nav-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--muted);padding:14px 10px 6px;
+  }
+  .nav-item{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 10px;border-radius:7px;
+    color:var(--slate);font-size:13px;font-weight:500;
+    cursor:pointer;border:1px solid transparent;background:none;width:100%;text-align:left;
+  }
+  .nav-item:hover{background:var(--surface-2);color:var(--ink);}
+  .nav-item.active{background:var(--accent-soft);color:var(--accent-ink);font-weight:600;}
+  .nav-item .ic{width:16px;height:16px;flex:none;opacity:.85;}
+  .role-box{
+    margin:10px;padding:10px 12px;border-radius:9px;background:var(--surface-2);
+    border:1px solid var(--border);
+  }
+  .role-box .who{font-size:12.5px;font-weight:600;}
+  .role-box .role{font-size:11.5px;color:var(--muted);}
+  .pill-role{
+    display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:.03em;
+    padding:2px 7px;border-radius:100px;background:var(--accent-soft);color:var(--accent-ink);
+  }
+
+  /* Topbar */
+  .topbar{
+    grid-area:topbar;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 20px;
+    min-width:0;
+  }
+  .crumb{font-size:13px;color:var(--muted);}
+  .crumb b{color:var(--ink);font-weight:600;}
+  .topbar-actions{display:flex;gap:8px;align-items:center;}
+  .search{
+    display:flex;align-items:center;gap:6px;
+    background:var(--surface-2);border:1px solid var(--border);border-radius:7px;
+    padding:6px 10px;font-size:12.5px;color:var(--muted);width:200px;
+  }
+
+  /* Main */
+  main.view-port{grid-area:main;overflow-y:auto;padding:22px 26px 60px;min-width:0;}
+  .view{display:none;max-width:1180px;}
+  .view.active{display:block;}
+  .page-head{margin-bottom:18px;}
+  .page-head h1{font-size:19px;margin:0 0 4px;letter-spacing:-0.01em;text-wrap:balance;}
+  .page-head p{margin:0;color:var(--muted);font-size:13px;}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 14px;border-radius:7px;font-size:13px;font-weight:600;
+    border:1px solid var(--border);background:var(--surface);color:var(--ink);cursor:pointer;
+  }
+  .btn:hover{background:var(--surface-2);}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-contrast);}
+  .btn.primary:hover{background:var(--accent-ink);border-color:var(--accent-ink);}
+  .btn.sm{padding:5px 10px;font-size:12px;}
+
+  /* Cards / grid */
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:11px;
+    padding:16px 16px 14px;box-shadow:var(--shadow);
+  }
+  .kpi .label{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;}
+  .kpi .value{font-size:24px;font-weight:700;margin-top:8px;letter-spacing:-0.01em;}
+  .kpi .delta{font-size:12px;margin-top:6px;color:var(--muted);}
+  .kpi .delta.up{color:var(--success);}
+  .kpi .delta.warn{color:var(--warning);}
+
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:11px;box-shadow:var(--shadow);overflow:hidden;}
+  .panel-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 16px;border-bottom:1px solid var(--border);
+  }
+  .panel-head h2{font-size:14px;margin:0;font-weight:650;}
+  .two-col{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;align-items:start;}
+
+  /* Chart */
+  .spark{width:100%;height:120px;display:block;}
+
+  /* Tables */
+  .table-wrap{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px;}
+  thead th{
+    text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--muted);font-weight:700;padding:9px 14px;border-bottom:1px solid var(--border);
+    background:var(--surface-2);position:sticky;top:0;
+  }
+  tbody td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--slate);vertical-align:middle;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:var(--surface-2);}
+  td.name{color:var(--ink);font-weight:600;}
+  td.right, th.right{text-align:right;}
+
+  .pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;font-size:11.5px;font-weight:650;}
+  .pill.ok{background:var(--success-soft);color:var(--success);}
+  .pill.warn{background:var(--warning-soft);color:var(--warning);}
+  .pill.bad{background:var(--critical-soft);color:var(--critical);}
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+
+  .toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap;}
+  .toolbar .left{display:flex;gap:8px;align-items:center;}
+  .filter-input{
+    padding:7px 10px;border-radius:7px;border:1px solid var(--border);background:var(--surface);
+    color:var(--ink);font-size:13px;min-width:220px;
+  }
+  .seg{display:flex;border:1px solid var(--border);border-radius:7px;overflow:hidden;}
+  .seg button{padding:6px 12px;font-size:12.5px;border:none;background:var(--surface);color:var(--slate);cursor:pointer;}
+  .seg button.active{background:var(--accent-soft);color:var(--accent-ink);font-weight:650;}
+  .seg button + button{border-left:1px solid var(--border);}
+
+  /* Payroll run wizard */
+  .steps{display:flex;gap:0;margin-bottom:20px;border:1px solid var(--border);border-radius:11px;background:var(--surface);overflow:hidden;box-shadow:var(--shadow);}
+  .step{flex:1;padding:13px 16px;display:flex;gap:10px;align-items:center;border-right:1px solid var(--border);}
+  .step:last-child{border-right:none;}
+  .step .n{
+    width:22px;height:22px;border-radius:50%;background:var(--surface-2);color:var(--muted);
+    display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex:none;
+  }
+  .step.done .n{background:var(--success);color:#fff;}
+  .step.current .n{background:var(--accent);color:var(--accent-contrast);}
+  .step .t{font-size:12.5px;font-weight:650;color:var(--ink);}
+  .step .s{font-size:11px;color:var(--muted);}
+
+  .summary-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--border);font-size:13px;}
+  .summary-row:last-child{border-bottom:none;}
+  .summary-row.total{border-top:1px solid var(--border);border-bottom:none;padding-top:12px;margin-top:4px;font-weight:700;font-size:14.5px;}
+  .summary-row .lbl{color:var(--slate);}
+  .summary-row .lbl small{display:block;color:var(--muted);font-size:11px;font-weight:400;}
+
+  /* Payslip document */
+  .payslip-wrap{display:flex;gap:18px;align-items:flex-start;}
+  .payslip-doc{
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    width:520px;flex:none;box-shadow:var(--shadow);overflow:hidden;
+  }
+  .payslip-band{background:var(--accent);color:var(--accent-contrast);padding:16px 20px;display:flex;justify-content:space-between;align-items:flex-start;}
+  .payslip-band .co{display:flex;gap:10px;align-items:center;}
+  .payslip-band .logo{width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
+  .payslip-band .co-name{font-weight:700;font-size:14px;}
+  .payslip-band .co-sub{font-size:11px;opacity:.85;}
+  .payslip-band .period{text-align:right;font-size:12px;opacity:.9;}
+  .payslip-emp{padding:14px 20px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:12.5px;}
+  .payslip-emp .k{color:var(--muted);}
+  .payslip-emp .v{color:var(--ink);font-weight:600;}
+  .payslip-cols{display:grid;grid-template-columns:1fr 1fr;}
+  .payslip-cols .col{padding:14px 20px;}
+  .payslip-cols .col + .col{border-left:1px solid var(--border);}
+  .payslip-cols h3{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 10px;}
+  .payslip-line{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;}
+  .payslip-net{
+    background:var(--accent-soft);color:var(--accent-ink);
+    padding:14px 20px;display:flex;justify-content:space-between;align-items:center;
+    font-weight:700;font-size:14.5px;
+  }
+  .payslip-actions{display:flex;flex-direction:column;gap:8px;padding-top:2px;}
+
+  .hint{font-size:12px;color:var(--muted);line-height:1.5;max-width:38ch;}
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px;}
+</style>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="org-switch">
+      <div class="org-mark">MA</div>
+      <div>
+        <div class="org-name">Meridian Apparels Pvt Ltd</div>
+        <div class="org-fy">FY 2026–27 · Aug run</div>
+      </div>
+    </div>
+
+    <nav class="primary" id="primaryNav">
+      <div class="nav-label">Overview</div>
+      <button class="nav-item active" data-view="dashboard">Dashboard</button>
+
+      <div class="nav-label">Workforce</div>
+      <button class="nav-item" data-view="employees">Employees</button>
+      <button class="nav-item" data-view="attendance">Attendance</button>
+      <button class="nav-item" data-view="leave">Leave &amp; Holidays</button>
+
+      <div class="nav-label">Payroll</div>
+      <button class="nav-item" data-view="payrollrun">Payroll Run</button>
+      <button class="nav-item" data-view="payslip">Payslips</button>
+      <button class="nav-item" data-view="reports">Reports</button>
+
+      <div class="nav-label">Organization</div>
+      <button class="nav-item" data-view="settings">Users</button>
+      <button class="nav-item" data-view="roles">Roles &amp; Permissions</button>
+    </nav>
+
+    <div class="role-box">
+      <div class="who">Ananya Rao</div>
+      <div class="role">ananya@meridianapparels.in</div>
+      <span class="pill-role">ACCOUNTANT</span>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="crumb" id="crumb"><b>Dashboard</b> · Meridian Apparels Pvt Ltd</div>
+    <div class="topbar-actions">
+      <div class="search">Search employees, payslips…</div>
+      <button class="btn sm">Aug 2026</button>
+    </div>
+  </header>
+
+  <main class="view-port">
+
+    <!-- DASHBOARD -->
+    <section class="view active" id="view-dashboard">
+      <div class="page-head">
+        <h1>Good morning, Ananya</h1>
+        <p>Here's where Meridian Apparels stands for the August payroll cycle.</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card kpi">
+          <div class="label">Active Employees</div>
+          <div class="value num">184</div>
+          <div class="delta up">+6 this month</div>
+        </div>
+        <div class="card kpi">
+          <div class="label">Aug Payroll Status</div>
+          <div class="value" style="font-size:17px;">Pending Review</div>
+          <div class="delta warn">Runs on 31 Aug</div>
+        </div>
+        <div class="card kpi">
+          <div class="label">Pending Leave Requests</div>
+          <div class="value num">7</div>
+          <div class="delta">3 need approval today</div>
+        </div>
+        <div class="card kpi">
+          <div class="label">Projected Net Payout</div>
+          <div class="value num">₹28.4L</div>
+          <div class="delta up">+2.1% vs Jul</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Net payout — last 6 cycles</h2>
+            <span class="hint">In ₹ lakhs</span>
+          </div>
+          <div style="padding:16px 18px;">
+            <svg class="spark" viewBox="0 0 560 120" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="30" x2="560" y2="30" stroke="var(--border)" stroke-width="1"/>
+              <line x1="0" y1="60" x2="560" y2="60" stroke="var(--border)" stroke-width="1"/>
+              <line x1="0" y1="90" x2="560" y2="90" stroke="var(--border)" stroke-width="1"/>
+              <polygon points="0,80 93,74 186,68 280,58 373,50 466,34 560,26 560,120 0,120" fill="url(#fillGrad)"/>
+              <polyline points="0,80 93,74 186,68 280,58 373,50 466,34 560,26" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <circle cx="560" cy="26" r="4.5" fill="var(--accent)"/>
+            </svg>
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px;">
+              <span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug (proj.)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Needs your attention</h2></div>
+          <div style="padding:6px 0;">
+            <div style="padding:11px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;">
+              <span>3 employees missing bank IFSC</span>
+              <span class="pill bad"><span class="dot"></span>Blocks payout</span>
+            </div>
+            <div style="padding:11px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;">
+              <span>ESIC due date in 4 days</span>
+              <span class="pill warn"><span class="dot"></span>Upcoming</span>
+            </div>
+            <div style="padding:11px 16px;display:flex;justify-content:space-between;">
+              <span>Attendance locked for Aug</span>
+              <span class="pill ok"><span class="dot"></span>Done</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMPLOYEES -->
+    <section class="view" id="view-employees">
+      <div class="page-head">
+        <h1>Employees</h1>
+        <p>184 active · 2 exited this cycle</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="left">
+          <input class="filter-input" placeholder="Search by name, ID or department" />
+          <div class="seg">
+            <button class="active">All</button>
+            <button>Production</button>
+            <button>Accounts</button>
+            <button>HR</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn sm">Import Excel</button>
+          <button class="btn sm primary">+ Add Employee</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th><th>Name</th><th>Department</th><th>Designation</th>
+                <th>PF</th><th>ESIC</th><th>Bank</th><th class="right">Gross / mo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="num">MA-0142</td><td class="name">Ravi Kumar</td><td>Production</td><td>Machine Operator</td>
+                <td><span class="pill ok"><span class="dot"></span>Linked</span></td>
+                <td><span class="pill ok"><span class="dot"></span>Linked</span></td>
+                <td><span class="pill ok"><span class="dot"></span>Verified</span></td>
+                <td class="right num">₹22,400</td>
+              </tr>
+              <tr>
+                <td class="num">MA-0098</td><td class="name">Priya Sharma</td><td>Human Resources</td><td>HR Executive</td>
+                <td><span class="pill ok"><span class="dot"></span>Linked</span></td>
+                <td><span class="pill bad"><span class="dot"></span>Not applicable</span></td>
+                <td><span class="pill ok"><span class="dot"></span>Verified</span></td>
+                <td class="right num">₹38,000</td>
+              </tr>
+              <tr>
+                <td class="num">MA-0176</td><td class="name">Ankit Verma</td><td>Accounts</td><td>Accounts Executive</td>
+                <td><span class="pill ok"><span class="dot"></span>Linked</span></td>
+                <td><span class="pill ok"><span class="dot"></span>Linked</span></td>
+                <td><span class="pill warn"><span class="dot"></span>Pending IFSC</span></td>
+                <td class="right num">₹31,200</td>
+              </tr>
+              <tr>
+                <td class="num">MA-0201</td><td class="name">Sunita Devi</td><td>Production</td><td>Line Supervisor</td>
+                <td><span class="pill ok"><span class="dot"></span>Linked</span></td>
+                <td><span class="pill ok"><span class="dot"></span>Linked</span></td>
+                <td><span class="pill ok"><span class="dot"></span>Verified</span></td>
+                <td class="right num">₹27,600</td>
+              </tr>
+              <tr>
+                <td class="num">MA-0055</td><td class="name">Mohammed Aariz</td><td>Sales</td><td>Regional Sales Lead</td>
+                <td><span class="pill ok"><span class="dot"></span>Linked</span></td>
+                <td><span class="pill bad"><span class="dot"></span>Not applicable</span></td>
+                <td><span class="pill ok"><span class="dot"></span>Verified</span></td>
+                <td class="right num">₹52,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATTENDANCE -->
+    <section class="view" id="view-attendance">
+      <div class="page-head">
+        <h1>Attendance — August 2026</h1>
+        <p>Working days this cycle: 26 · Auto-calculated from holidays and weekly offs.</p>
+      </div>
+      <div class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Name</th><th class="right">Present</th><th class="right">Absent</th><th class="right">Leave</th><th class="right">Half Day</th><th class="right">OT (hrs)</th><th class="right">Payable Days</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">MA-0142</td><td class="name">Ravi Kumar</td><td class="right num">24</td><td class="right num">0</td><td class="right num">2</td><td class="right num">0</td><td class="right num">6.5</td><td class="right num">26</td></tr>
+              <tr><td class="num">MA-0098</td><td class="name">Priya Sharma</td><td class="right num">25</td><td class="right num">0</td><td class="right num">1</td><td class="right num">0</td><td class="right num">0</td><td class="right num">26</td></tr>
+              <tr><td class="num">MA-0176</td><td class="name">Ankit Verma</td><td class="right num">22</td><td class="right num">1</td><td class="right num">1</td><td class="right num">2</td><td class="right num">3.0</td><td class="right num">24</td></tr>
+              <tr><td class="num">MA-0201</td><td class="name">Sunita Devi</td><td class="right num">23</td><td class="right num">2</td><td class="right num">1</td><td class="right num">0</td><td class="right num">8.0</td><td class="right num">24</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEAVE -->
+    <section class="view" id="view-leave">
+      <div class="page-head">
+        <h1>Leave &amp; Holidays</h1>
+        <p>7 pending requests across 4 departments.</p>
+      </div>
+      <div class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Employee</th><th>Type</th><th>From</th><th>To</th><th>Days</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="name">Ankit Verma</td><td>Casual Leave</td><td class="num">14 Aug</td><td class="num">15 Aug</td><td class="right num">2</td><td><span class="pill warn"><span class="dot"></span>Pending</span></td><td><button class="btn sm">Review</button></td></tr>
+              <tr><td class="name">Sunita Devi</td><td>Sick Leave</td><td class="num">18 Aug</td><td class="num">18 Aug</td><td class="right num">1</td><td><span class="pill warn"><span class="dot"></span>Pending</span></td><td><button class="btn sm">Review</button></td></tr>
+              <tr><td class="name">Ravi Kumar</td><td>Earned Leave</td><td class="num">02 Aug</td><td class="num">03 Aug</td><td class="right num">2</td><td><span class="pill ok"><span class="dot"></span>Approved</span></td><td><button class="btn sm">View</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYROLL RUN -->
+    <section class="view" id="view-payrollrun">
+      <div class="page-head">
+        <h1>Payroll Run — August 2026</h1>
+        <p>Review calculated salaries before generating payslips.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step done"><div class="n">✓</div><div><div class="t">Lock Attendance</div><div class="s">Completed 28 Aug</div></div></div>
+        <div class="step current"><div class="n">2</div><div><div class="t">Review &amp; Adjust</div><div class="s">184 employees calculated</div></div></div>
+        <div class="step"><div class="n">3</div><div><div class="t">Approve &amp; Generate</div><div class="s">Payslips + bank file</div></div></div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head"><h2>Employee-wise calculation</h2></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th class="right">Gross</th><th class="right">EPF</th><th class="right">ESIC</th><th class="right">TDS</th><th class="right">Net Pay</th></tr></thead>
+              <tbody>
+                <tr><td class="name">Ravi Kumar</td><td class="right num">22,400</td><td class="right num">1,800</td><td class="right num">168</td><td class="right num">0</td><td class="right num">20,432</td></tr>
+                <tr><td class="name">Priya Sharma</td><td class="right num">38,000</td><td class="right num">2,160</td><td class="right num">0</td><td class="right num">640</td><td class="right num">35,200</td></tr>
+                <tr><td class="name">Ankit Verma</td><td class="right num">28,800</td><td class="right num">1,800</td><td class="right num">216</td><td class="right num">0</td><td class="right num">26,034</td></tr>
+                <tr><td class="name">Sunita Devi</td><td class="right num">25,500</td><td class="right num">1,800</td><td class="right num">191</td><td class="right num">0</td><td class="right num">23,059</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Cycle summary</h2></div>
+          <div style="padding:14px 16px;">
+            <div class="summary-row"><span class="lbl">Gross payout<small>184 employees</small></span><span class="num">₹31.8L</span></div>
+            <div class="summary-row"><span class="lbl">EPF (employee)</span><span class="num">−₹2.1L</span></div>
+            <div class="summary-row"><span class="lbl">ESIC (employee)</span><span class="num">−₹18.4K</span></div>
+            <div class="summary-row"><span class="lbl">TDS</span><span class="num">−₹94.2K</span></div>
+            <div class="summary-row"><span class="lbl">Loans &amp; advances</span><span class="num">−₹1.2L</span></div>
+            <div class="summary-row total"><span class="lbl">Net payout</span><span class="num">₹28.4L</span></div>
+            <button class="btn primary" style="width:100%;margin-top:14px;">Approve &amp; Generate Payslips</button>
+            <p class="hint" style="margin-top:10px;">This locks the cycle, generates branded PDF payslips, and prepares the bank transfer file.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYSLIP -->
+    <section class="view" id="view-payslip">
+      <div class="page-head">
+        <h1>Payslips</h1>
+        <p>August 2026 · Ravi Kumar</p>
+      </div>
+
+      <div class="payslip-wrap">
+        <div class="payslip-doc">
+          <div class="payslip-band">
+            <div class="co">
+              <div class="logo">MA</div>
+              <div>
+                <div class="co-name">Meridian Apparels Pvt Ltd</div>
+                <div class="co-sub">Salary Slip</div>
+              </div>
+            </div>
+            <div class="period">August 2026<br/>Payable days: 26</div>
+          </div>
+          <div class="payslip-emp">
+            <div><div class="k">Employee</div><div class="v">Ravi Kumar</div></div>
+            <div><div class="k">Employee ID</div><div class="v num">MA-0142</div></div>
+            <div><div class="k">Designation</div><div class="v">Machine Operator</div></div>
+            <div><div class="k">Department</div><div class="v">Production</div></div>
+            <div><div class="k">UAN</div><div class="v num">1007 4432 1188</div></div>
+            <div><div class="k">Bank A/C</div><div class="v num">XXXX 4471</div></div>
+          </div>
+          <div class="payslip-cols">
+            <div class="col">
+              <h3>Earnings</h3>
+              <div class="payslip-line"><span>Basic</span><span class="num">14,000</span></div>
+              <div class="payslip-line"><span>HRA</span><span class="num">5,600</span></div>
+              <div class="payslip-line"><span>Conveyance</span><span class="num">1,600</span></div>
+              <div class="payslip-line"><span>Overtime</span><span class="num">1,200</span></div>
+            </div>
+            <div class="col">
+              <h3>Deductions</h3>
+              <div class="payslip-line"><span>EPF</span><span class="num">1,800</span></div>
+              <div class="payslip-line"><span>ESIC</span><span class="num">168</span></div>
+              <div class="payslip-line"><span>TDS</span><span class="num">0</span></div>
+              <div class="payslip-line"><span>Advance</span><span class="num">0</span></div>
+            </div>
+          </div>
+          <div class="payslip-net">
+            <span>Net Pay</span>
+            <span class="num">₹20,432</span>
+          </div>
+        </div>
+
+        <div class="payslip-actions">
+          <button class="btn primary sm">Download PDF</button>
+          <button class="btn sm">Send via Email</button>
+          <p class="hint">Delivery is logged per employee — you'll see sent/read status per payslip in the run history.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPORTS -->
+    <section class="view" id="view-reports">
+      <div class="page-head">
+        <h1>Reports</h1>
+        <p>Export statutory and operational reports for any cycle.</p>
+      </div>
+      <div class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Report</th><th>Covers</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="name">Salary Register</td><td>All employees, Aug 2026</td><td><button class="btn sm">Export Excel</button> <button class="btn sm">PDF</button></td></tr>
+              <tr><td class="name">EPF Contribution</td><td>Employee + employer share</td><td><button class="btn sm">Export Excel</button> <button class="btn sm">PDF</button></td></tr>
+              <tr><td class="name">ESIC Contribution</td><td>Employee + employer share</td><td><button class="btn sm">Export Excel</button> <button class="btn sm">PDF</button></td></tr>
+              <tr><td class="name">Bank Transfer File</td><td>NEFT-ready, 184 accounts</td><td><button class="btn sm">Export</button></td></tr>
+              <tr><td class="name">Attendance &amp; OT</td><td>Aug 2026 cycle</td><td><button class="btn sm">Export Excel</button></td></tr>
+              <tr><td class="name">Joining / Exit</td><td>FY 2026–27</td><td><button class="btn sm">Export Excel</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- USERS -->
+    <section class="view" id="view-settings">
+      <div class="page-head">
+        <h1>Users</h1>
+        <p>4 people with portal access at Meridian Apparels — 184 employees have self-service only.</p>
+      </div>
+      <div class="toolbar">
+        <div class="left"></div>
+        <button class="btn sm primary">+ Invite User</button>
+      </div>
+      <div class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>User</th><th>Email</th><th>Role</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="name">Vikram Mehta</td><td class="num">vikram@meridianapparels.in</td><td><span class="pill ok"><span class="dot"></span>Org Admin</span></td><td>Active</td><td><button class="btn sm" disabled title="Org Admin role is locked">Change Role</button></td></tr>
+              <tr><td class="name">Ananya Rao</td><td class="num">ananya@meridianapparels.in</td><td><span class="pill ok"><span class="dot"></span>Accountant</td><td>Active</td><td><button class="btn sm">Change Role</button></td></tr>
+              <tr><td class="name">Priya Sharma</td><td class="num">priya@meridianapparels.in</td><td><span class="pill ok"><span class="dot"></span>HR</span></td><td>Active</td><td><button class="btn sm">Change Role</button></td></tr>
+              <tr><td class="name">Karan Singh</td><td class="num">karan@meridianapparels.in</td><td><span class="pill warn"><span class="dot"></span>Regional HR — Production</span></td><td>Active</td><td><button class="btn sm">Change Role</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLES & PERMISSIONS -->
+    <section class="view" id="view-roles">
+      <div class="page-head">
+        <h1>Roles &amp; Permissions</h1>
+        <p>Control exactly what each role can see and do — clone a default role to build a custom one.</p>
+      </div>
+
+      <div class="two-col" style="grid-template-columns:1fr 1.6fr;">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Roles</h2>
+            <button class="btn sm primary">+ Create Role</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Role</th><th>Type</th><th class="right">Users</th></tr></thead>
+              <tbody>
+                <tr><td class="name">Org Admin</td><td><span class="pill ok"><span class="dot"></span>System · Locked</span></td><td class="right num">1</td></tr>
+                <tr style="background:var(--accent-soft);"><td class="name">HR</td><td><span class="pill ok"><span class="dot"></span>System</span></td><td class="right num">1</td></tr>
+                <tr><td class="name">Accountant</td><td><span class="pill ok"><span class="dot"></span>System</span></td><td class="right num">1</td></tr>
+                <tr><td class="name">Employee</td><td><span class="pill ok"><span class="dot"></span>System</span></td><td class="right num">184</td></tr>
+                <tr><td class="name">Regional HR — Production</td><td><span class="pill warn"><span class="dot"></span>Custom</span></td><td class="right num">1</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="hint" style="padding:12px 16px 16px;">Org Admin is locked — its permissions can't be edited or removed, so nobody can accidentally lock themselves out.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Editing: HR</h2>
+            <div style="display:flex;gap:8px;">
+              <button class="btn sm">Clone</button>
+              <button class="btn sm primary">Save Changes</button>
+            </div>
+          </div>
+          <div style="padding:6px 18px 18px;">
+
+            <div style="padding:12px 0;border-bottom:1px solid var(--border);">
+              <div style="font-weight:650;font-size:13px;margin-bottom:8px;">Employees</div>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> View</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> Create</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> Edit</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" /> Delete</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> Import</label>
+            </div>
+
+            <div style="padding:12px 0;border-bottom:1px solid var(--border);">
+              <div style="font-weight:650;font-size:13px;margin-bottom:8px;">Attendance &amp; Leave</div>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> View</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> Mark attendance</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> Approve/reject leave</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> Configure leave types</label>
+            </div>
+
+            <div style="padding:12px 0;border-bottom:1px solid var(--border);">
+              <div style="font-weight:650;font-size:13px;margin-bottom:8px;">Payroll</div>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" /> View</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" /> Run payroll</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" /> Approve payroll</label>
+            </div>
+
+            <div style="padding:12px 0;border-bottom:1px solid var(--border);">
+              <div style="font-weight:650;font-size:13px;margin-bottom:8px;">Reports</div>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" checked /> View</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" /> Export</label>
+            </div>
+
+            <div style="padding:12px 0;">
+              <div style="font-weight:650;font-size:13px;margin-bottom:8px;">Roles &amp; Users</div>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" /> Manage roles</label>
+              <label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;"><input type="checkbox" /> Invite users</label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  var navItems = document.querySelectorAll('.nav-item');
+  var views = document.querySelectorAll('.view');
+  var crumb = document.getElementById('crumb');
+  navItems.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      navItems.forEach(function(b){ b.classList.remove('active'); });
+      views.forEach(function(v){ v.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('view-' + btn.dataset.view).classList.add('active');
+      crumb.innerHTML = '<b>' + btn.textContent + '</b> · Meridian Apparels Pvt Ltd';
+    });
+  });
+</script>
