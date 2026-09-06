@@ -1,370 +1,233 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, CheckCircle2, Sparkles, Bot, ShieldAlert, Cpu, Zap, RefreshCw, Check } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useSyncExternalStore } from 'react';
+import {
+  type Countdown,
+  subscribeToClock,
+  getCountdownSnapshot,
+  getCountdownServerSnapshot,
+  parseCountdownSnapshot,
+} from '@/lib/theme-vars';
 
-interface HeroProps {
-  onOpenWaitlist: () => void;
-}
+const statCards: Array<{ key: keyof Countdown; label: string; accent?: boolean }> = [
+  { key: 'd', label: 'days' },
+  { key: 'h', label: 'hours' },
+  { key: 'm', label: 'mins' },
+  { key: 's', label: 'secs', accent: true },
+];
 
-export const Hero: React.FC<HeroProps> = ({ onOpenWaitlist }) => {
+export const Hero: React.FC<{ onQuickJoin: (email: string) => void }> = ({ onQuickJoin }) => {
+  const snapshot = useSyncExternalStore(subscribeToClock, getCountdownSnapshot, getCountdownServerSnapshot);
+  const countdown: Countdown = parseCountdownSnapshot(snapshot);
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [queuePosition, setQueuePosition] = useState<number>(142);
 
-  // Interactive AI Prompt Simulation State
-  const [activePrompt, setActivePrompt] = useState<string>('audit');
-  const [aiAnalyzing, setAiAnalyzing] = useState<boolean>(false);
-
-  // Target: September 15, 2026 00:00:00 IST
-  const targetDate = new Date('2026-09-15T00:00:00+05:30').getTime();
-
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    const updateCountdown = () => {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-      if (diff > 0) {
-        setTimeLeft({
-          days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((diff % (1000 * 60)) / 1000),
-        });
-      }
-    };
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handlePromptClick = (promptKey: string) => {
-    setActivePrompt(promptKey);
-    setAiAnalyzing(true);
-    setTimeout(() => setAiAnalyzing(false), 500);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !email.includes('@')) return;
-
-    setLoading(true);
-    try {
-      const res = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      if (data.position) {
-        setQueuePosition(data.position);
-      }
-      setSubmitted(true);
-    } catch (err) {
-      console.error(err);
-      setSubmitted(true);
-    } finally {
-      setLoading(false);
-    }
+    if (!email) return;
+    onQuickJoin(email);
   };
 
   return (
-    <section className="relative pt-12 pb-20 overflow-hidden">
-      {/* Premium Aurora Background & Dot Grid */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-screen opacity-80">
-        <motion.div 
-          animate={{ 
-            rotate: [0, 90, 180, 270, 360],
-            scale: [1, 1.2, 1.1, 1.3, 1] 
+    <section
+      style={{
+        padding: 'clamp(52px,8vw,104px) 0 clamp(40px,6vw,72px)',
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+        gap: 'clamp(32px,4vw,60px)', alignItems: 'center',
+      }}
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, minWidth: 0 }}>
+        <div
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 9, padding: '6px 13px 6px 10px',
+            borderRadius: 'var(--radius-full)', border: '1px solid var(--pill-border)', background: 'var(--pill-bg)',
+            backdropFilter: 'blur(10px)', width: 'fit-content', maxWidth: '100%',
           }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] opacity-40 blur-[120px] bg-[conic-gradient(from_0deg,rgba(168,85,247,0.3),rgba(99,102,241,0.2),rgba(16,185,129,0.1),rgba(168,85,247,0.3))]" 
-        />
-        <motion.div 
-          animate={{ x: [0, 80, -40, 0], y: [0, -60, 40, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full blur-[140px] bg-indigo-500/20"
-        />
-      </div>
-      
-      {/* Subtle Dot Grid Overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:24px_24px] opacity-20 z-0 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)]" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto">
-          {/* AI Kicker Badge */}
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-500/15 via-indigo-500/15 to-blue-500/15 border border-purple-500/30 text-xs font-semibold text-purple-300 mb-8 shadow-xs"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span>AI-Powered Multi-Tenant Payroll Platform</span>
-          </motion.div>
-
-          {/* Main AI Headline with Staggered Reveal */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--color-text)] leading-[1.06] mb-6 flex flex-wrap justify-center gap-x-3 sm:gap-x-4">
-            {['Autonomous', 'Payroll.', 'Intelligent', 'HR.', 'Zero', 'Errors.'].map((word, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{ duration: 0.8, delay: 0.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className={i >= 2 ? "bg-gradient-to-r from-purple-400 via-indigo-300 to-emerald-400 bg-clip-text text-transparent" : ""}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </h1>
-
-          {/* Subtitle */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-xl text-[var(--color-text-muted)] max-w-2xl mx-auto mb-10 text-pretty"
-          >
-            AI agents that audit payroll, predict compliance, and answer HR queries in real-time.
-          </motion.p>
-
-          {/* Live Launch Countdown */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="inline-flex items-center justify-center gap-3 sm:gap-6 p-4 sm:p-5 rounded-2xl bg-[var(--color-surface)] border border-purple-500/30 shadow-xl mb-10 backdrop-blur-md"
-          >
-            <div className="text-center px-2">
-              <span className="font-mono text-2xl sm:text-4xl font-bold text-[var(--color-text)]">
-                {String(timeLeft.days).padStart(2, '0')}
-              </span>
-              <span className="block text-[10px] font-mono font-semibold text-purple-400 uppercase mt-1">Days</span>
-            </div>
-            <span className="text-xl font-mono text-[var(--color-text-subtle)]">:</span>
-            <div className="text-center px-2">
-              <span className="font-mono text-2xl sm:text-4xl font-bold text-[var(--color-text)]">
-                {String(timeLeft.hours).padStart(2, '0')}
-              </span>
-              <span className="block text-[10px] font-mono font-semibold text-purple-400 uppercase mt-1">Hours</span>
-            </div>
-            <span className="text-xl font-mono text-[var(--color-text-subtle)]">:</span>
-            <div className="text-center px-2">
-              <span className="font-mono text-2xl sm:text-4xl font-bold text-[var(--color-text)]">
-                {String(timeLeft.minutes).padStart(2, '0')}
-              </span>
-              <span className="block text-[10px] font-mono font-semibold text-purple-400 uppercase mt-1">Mins</span>
-            </div>
-            <span className="text-xl font-mono text-[var(--color-text-subtle)]">:</span>
-            <div className="text-center px-2">
-              <span className="font-mono text-2xl sm:text-4xl font-bold text-emerald-400">
-                {String(timeLeft.seconds).padStart(2, '0')}
-              </span>
-              <span className="block text-[10px] font-mono font-semibold text-purple-400 uppercase mt-1">Secs</span>
-            </div>
-          </motion.div>
-
-          {/* Email Waitlist Form (Posting to /api/waitlist) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="max-w-md mx-auto mb-16"
-          >
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your work email address..."
-                  className="flex-1 h-12 px-4 rounded-xl border border-purple-500/30 bg-[var(--color-surface)] text-[var(--color-text)] placeholder-[var(--color-text-subtle)] text-sm focus:outline-none focus:border-purple-400 shadow-xs transition-colors"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  disabled={loading}
-                  className="h-12 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap shadow-lg shadow-purple-500/25 relative overflow-hidden group"
-                  data-interactive="true"
-                >
-                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                  {loading ? (
-                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin relative z-10" />
-                  ) : (
-                    <>
-                      <span className="relative z-10">Join AI Waitlist</span>
-                      <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                </motion.button>
-              </form>
-            ) : (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="p-4 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-left flex items-start gap-3"
-              >
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-none mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-semibold text-[var(--color-text)]">VIP Spot Reserved!</h4>
-                  <p className="text-xs text-[var(--color-text-muted)] mt-1">
-                    You are position <strong className="font-mono text-emerald-400">#{queuePosition}</strong> on our VIP early access list. Notification sent to <strong className="text-[var(--color-text)]">jhaabhinav16@gmail.com</strong>.
-                  </p>
-                </div>
-              </motion.div>
-            )}
-          </motion.div>
+        >
+          <span style={{ position: 'relative', width: 7, height: 7, flex: 'none' }}>
+            <span style={{ position: 'absolute', inset: 0, borderRadius: 'var(--radius-full)', background: 'var(--primary-400)', animation: 'vPulse 2s ease-in-out infinite' }} />
+            <span style={{ position: 'absolute', inset: -3, borderRadius: 'var(--radius-full)', background: 'var(--primary-400)', opacity: 0.3, filter: 'blur(3px)' }} />
+          </span>
+          <span style={{ fontSize: 'var(--text-2xs)', letterSpacing: '.06em', textTransform: 'uppercase', fontWeight: 500, color: 'var(--pill-text)' }}>
+            AI-native payroll · launching 15 Sept 2026
+          </span>
         </div>
 
-        {/* AI Copilot Simulation Panel */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, type: "spring", stiffness: 100 }}
-          className="max-w-5xl mx-auto rounded-2xl border border-purple-500/30 bg-[var(--color-surface)] shadow-2xl overflow-hidden backdrop-blur-md"
-        >
-          {/* Top Window Header */}
-          <div className="h-11 bg-[var(--color-surface-2)] border-b border-[var(--color-border)] px-4 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 shrink-0">
-              <span className="w-3 h-3 rounded-full bg-rose-500/80 shrink-0" />
-              <span className="w-3 h-3 rounded-full bg-amber-500/80 shrink-0" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80 shrink-0" />
-              <span className="ml-3 font-mono text-xs text-[var(--color-text-subtle)] hidden sm:inline">
-                https://app.emplora.com/ai-copilot
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono text-purple-300 min-w-0">
-              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} className="shrink-0">
-                <Bot className="w-4 h-4 text-purple-400" />
-              </motion.div>
-              <span className="truncate">AI Copilot <span className="hidden sm:inline">Active</span></span>
-            </div>
-          </div>
+        <h1 style={{ margin: 0, fontSize: 'clamp(34px,4.6vw,62px)', lineHeight: 1.04, letterSpacing: '-.048em', fontWeight: 600, textWrap: 'pretty' }}>
+          <span
+            style={{
+              background: 'linear-gradient(102deg, var(--primary-400) 6%, var(--primary-600) 52%, var(--primary-500) 96%)',
+              WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'var(--color-primary-text)', WebkitTextFillColor: 'transparent',
+              display: 'inline-block',
+            }}
+          >
+            Payroll
+          </span>{' '}
+          that closes its own{' '}
+          <span style={{ position: 'relative', display: 'inline-block' }}>
+            <span
+              style={{
+                background: 'linear-gradient(102deg, var(--primary-500) 4%, var(--primary-400) 96%)',
+                WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'var(--color-primary-text)', WebkitTextFillColor: 'transparent',
+              }}
+            >
+              books.
+            </span>
+            <span style={{ position: 'absolute', left: 0, right: 0, bottom: '6%', height: '12%', background: 'linear-gradient(90deg, var(--primary-500), transparent)', opacity: 0.42, borderRadius: 2 }} />
+          </span>
+        </h1>
 
-          {/* Interactive AI Simulation Panel */}
-          <div className="p-6 sm:p-8 bg-[var(--color-canvas)] space-y-6">
-            {/* Quick AI Action Prompt Selector */}
-            <div className="flex flex-wrap items-center gap-2 border-b border-[var(--color-border)] pb-4">
-              <span className="text-[10px] sm:text-xs font-mono font-semibold text-[var(--color-text-subtle)] mr-1 w-full sm:w-auto mb-1 sm:mb-0">Try AI Prompt:</span>
-              <button
-                onClick={() => handlePromptClick('raise')}
-                className={`px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-mono font-medium transition-all text-left flex-1 sm:flex-none ${
-                  activePrompt === 'raise'
-                    ? 'bg-purple-600 text-white shadow-sm sm:scale-105'
-                    : 'bg-[var(--color-surface-2)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] sm:hover:scale-105'
-                }`}
-              >
-                💬 Increase Rahul's salary to ₹75k
-              </button>
-              <button
-                onClick={() => handlePromptClick('import')}
-                className={`px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-mono font-medium transition-all text-left flex-1 sm:flex-none ${
-                  activePrompt === 'import'
-                    ? 'bg-purple-600 text-white shadow-sm sm:scale-105'
-                    : 'bg-[var(--color-surface-2)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] sm:hover:scale-105'
-                }`}
-              >
-                📊 Add employees from Excel
-              </button>
-              <button
-                onClick={() => handlePromptClick('calc')}
-                className={`px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-mono font-medium transition-all text-left flex-1 sm:flex-none ${
-                  activePrompt === 'calc'
-                    ? 'bg-purple-600 text-white shadow-sm sm:scale-105'
-                    : 'bg-[var(--color-surface-2)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] sm:hover:scale-105'
-                }`}
-              >
-                ⚡ Calculate payroll for this month
-              </button>
-            </div>
+        <p style={{ margin: 0, fontSize: 'var(--text-lg)', lineHeight: 1.52, color: 'var(--color-text-muted)', maxWidth: '50ch', textWrap: 'pretty' }}>
+          The pay run, the statutory filing and the double-entry journal behind it — one system. Ask it anything in plain language. It proposes; you approve.
+        </p>
 
-            {/* AI Output Card */}
-            <div className="p-4 sm:p-5 rounded-xl bg-[var(--color-surface)] border border-purple-500/30 space-y-4">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-                <div className="flex items-center gap-2 w-full min-w-0">
-                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 grid place-items-center shrink-0">
-                    <Bot className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h4 className="text-sm font-semibold text-[var(--color-text)] flex flex-wrap items-center gap-2">
-                      <span className="truncate">Emplora AI</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-400 whitespace-nowrap">99.8% Accuracy</span>
-                    </h4>
-                    <span className="text-[11px] font-mono text-[var(--color-text-subtle)] truncate block">Real-time Tenant Scan</span>
-                  </div>
-                </div>
-                {aiAnalyzing && (
-                  <span className="flex items-center gap-1.5 text-[10px] sm:text-xs font-mono text-purple-400 shrink-0">
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Analyzing...
-                  </span>
-                )}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0,1fr))', gap: 'clamp(6px,1vw,12px)', maxWidth: 560 }}>
+            {statCards.map((s) => (
+              <div
+                key={s.key}
+                style={{
+                  position: 'relative', overflow: 'hidden',
+                  border: `1px solid ${s.accent ? 'var(--primary-500)' : 'var(--hairline)'}`,
+                  borderRadius: 'var(--radius-sm)', background: s.accent ? 'var(--glass-accent)' : 'var(--glass-card)',
+                  backdropFilter: 'blur(12px)', padding: 'clamp(11px,1.6vw,17px) clamp(6px,1vw,14px)',
+                  display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0,
+                  boxShadow: s.accent ? '0 8px 26px -12px var(--primary-600)' : undefined,
+                }}
+              >
+                <span
+                  style={{
+                    position: 'absolute', top: 0, left: s.accent ? '10%' : '14%', right: s.accent ? '10%' : '14%', height: 1,
+                    background: `linear-gradient(90deg, transparent, var(--${s.accent ? 'primary-300' : 'primary-400'}), transparent)`,
+                  }}
+                />
+                <span
+                  className="num"
+                  style={{
+                    fontSize: 'clamp(28px,5.4vw,50px)', fontWeight: 600, letterSpacing: '-.05em', lineHeight: 0.94,
+                    color: s.accent ? 'var(--color-primary-text)' : undefined,
+                  }}
+                >
+                  {countdown[s.key]}
+                </span>
+                <span style={{ fontSize: 'var(--text-2xs)', color: 'var(--color-text-subtle)', letterSpacing: '.09em', textTransform: 'uppercase' }}>
+                  {s.label}
+                </span>
               </div>
-
-              {/* Prompt Dynamic Content */}
-              <div className="relative min-h-[96px]">
-                {!aiAnalyzing ? (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0"
-                  >
-                    {activePrompt === 'raise' && (
-                      <div className="p-4 rounded-lg bg-[var(--color-surface-2)] border border-[var(--color-border)] text-xs font-mono space-y-2 text-[var(--color-text-muted)]">
-                        <div className="flex items-center gap-2 text-amber-400 font-semibold">
-                          <Check className="w-4 h-4" /> Proposed change · needs your approval
-                        </div>
-                        <p className="text-[var(--color-text)]">
-                          &quot;Rahul crosses the ESIC gross ceiling, so ESIC stops from September — his net rises by ₹465 more than the raise alone. Annual payroll cost increases by ₹1,56,000.&quot;
-                        </p>
-                      </div>
-                    )}
-
-                    {activePrompt === 'import' && (
-                      <div className="p-4 rounded-lg bg-[var(--color-surface-2)] border border-[var(--color-border)] text-xs font-mono space-y-2 text-[var(--color-text-muted)]">
-                        <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                          <Check className="w-4 h-4" /> Excel mapped successfully
-                        </div>
-                        <p className="text-[var(--color-text)]">
-                          &quot;Found 30 employees in the file. UAN and Bank details validated. Ready to preview and commit to the database.&quot;
-                        </p>
-                      </div>
-                    )}
-
-                    {activePrompt === 'calc' && (
-                      <div className="p-4 rounded-lg bg-[var(--color-surface-2)] border border-[var(--color-border)] text-xs font-mono space-y-2 text-[var(--color-text-muted)]">
-                        <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                          <Zap className="w-4 h-4" /> Payroll calculation drafted
-                        </div>
-                        <p className="text-[var(--color-text)]">
-                          &quot;Calculated for 248 employees. Total Gross: ₹1.4Cr. 3 anomalies detected regarding absent days without leave requests. Preview totals before locking.&quot;
-                        </p>
-                      </div>
-                    )}
-                  </motion.div>
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="flex items-center gap-2 text-purple-400 font-mono text-sm">
-                      <motion.span animate={{ y: [0, -6, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className="w-2 h-2 rounded-full bg-purple-500" />
-                      <motion.span animate={{ y: [0, -6, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.15 }} className="w-2 h-2 rounded-full bg-purple-500" />
-                      <motion.span animate={{ y: [0, -6, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.3 }} className="w-2 h-2 rounded-full bg-purple-500" />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+            ))}
           </div>
-        </motion.div>
+        </div>
+
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center', maxWidth: 560 }}>
+            <div style={{ flex: '1 1 240px', minWidth: 0 }}>
+              <input
+                className="input"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your work email address…"
+                style={{ height: 46, background: 'var(--glass-card)', borderColor: 'var(--hairline)' }}
+              />
+            </div>
+            <button
+              type="submit"
+              style={{
+                position: 'relative', overflow: 'hidden', flex: 'none', display: 'inline-flex', alignItems: 'center', gap: 8,
+                height: 46, padding: '0 22px', border: 0, cursor: 'pointer', fontFamily: 'inherit',
+                borderRadius: 'var(--radius-sm)', fontSize: 'var(--text-sm)', fontWeight: 500, color: '#fff',
+                background: 'linear-gradient(135deg, var(--primary-500), var(--primary-700))',
+                boxShadow: '0 10px 28px -10px var(--primary-600), inset 0 1px 0 rgb(255 255 255 / .22)',
+              }}
+            >
+              <span
+                style={{
+                  position: 'absolute', top: 0, bottom: 0, width: '32%',
+                  background: 'linear-gradient(90deg, transparent, rgb(255 255 255 / .28), transparent)',
+                  animation: 'vSheen 5.2s ease-in-out infinite',
+                }}
+              />
+              <span style={{ position: 'relative' }}>Join the waitlist</span>
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: 'relative' }}>
+                <path d="M5 12h13M12.5 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+          <span style={{ fontSize: 'var(--text-2xs)', color: 'var(--color-text-subtle)' }}>
+            One email on launch day. Free below six employees, permanently.
+          </span>
+        </form>
+      </div>
+
+      <div style={{ display: 'grid', placeItems: 'center', minWidth: 0, position: 'relative' }}>
+        <div style={{ position: 'relative', width: 'min(330px, 100%)', aspectRatio: '1' }}>
+          <span
+            style={{
+              position: 'absolute', inset: '-12%', borderRadius: 'var(--radius-full)',
+              background: 'radial-gradient(circle, var(--primary-400) 0%, transparent 64%)',
+              opacity: 0.32, filter: 'blur(20px)', animation: 'vHalo 6s ease-in-out infinite',
+            }}
+          />
+          <span
+            style={{
+              position: 'absolute', inset: '4%', borderRadius: 'var(--radius-full)',
+              background: 'conic-gradient(from 0deg, transparent 0deg, var(--primary-300) 78deg, transparent 186deg)',
+              animation: 'vSpin 10s linear infinite', filter: 'blur(1px)',
+            }}
+          />
+          <span
+            style={{
+              position: 'absolute', inset: '8%', borderRadius: 'var(--radius-full)', overflow: 'hidden',
+              background: 'linear-gradient(150deg, var(--primary-500), var(--primary-700))',
+              boxShadow: '0 30px 70px -24px var(--primary-700), inset 0 3px 0 rgb(255 255 255 / .25)',
+              animation: 'vBreathe 6s ease-in-out infinite',
+            }}
+          >
+            <span
+              style={{
+                position: 'absolute', width: '136%', height: '136%', left: '-18%', top: '-18%',
+                borderRadius: 'var(--radius-full)', background: 'radial-gradient(circle at 30% 26%, var(--primary-400) 0%, transparent 48%)',
+                opacity: 0.6, animation: 'vDrift 13s ease-in-out infinite',
+              }}
+            />
+          </span>
+          <span style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', zIndex: 2 }}>
+            <svg viewBox="0 0 40 40" width="32%" height="32%" style={{ filter: 'drop-shadow(0 2px 10px rgb(0 0 0 / .32))' }}>
+              <path d="M28.2 29.2A13 13 0 1 1 33 20H7" fill="none" stroke="#fff" strokeWidth="5.4" strokeLinecap="round" />
+            </svg>
+          </span>
+
+          <div
+            style={{
+              position: 'absolute', top: '4%', right: '1%', zIndex: 3, padding: '9px 13px',
+              borderRadius: 'var(--radius-md)', border: '1px solid var(--hairline)', background: 'var(--float-solid)',
+              boxShadow: '0 12px 28px -12px rgb(0 0 0 / .45)', display: 'flex', flexDirection: 'column', gap: 2,
+            }}
+          >
+            <span style={{ fontSize: 'var(--text-2xs)', color: 'var(--color-text-subtle)', letterSpacing: '.06em', textTransform: 'uppercase' }}>Journal</span>
+            <span className="num" style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>Balanced</span>
+          </div>
+          <div
+            style={{
+              position: 'absolute', bottom: '12%', left: '0%', zIndex: 3, padding: '9px 13px',
+              borderRadius: 'var(--radius-md)', border: '1px solid var(--hairline)', background: 'var(--float-solid)',
+              boxShadow: '0 12px 28px -12px rgb(0 0 0 / .45)', display: 'flex', flexDirection: 'column', gap: 2,
+            }}
+          >
+            <span style={{ fontSize: 'var(--text-2xs)', color: 'var(--color-text-subtle)', letterSpacing: '.06em', textTransform: 'uppercase' }}>Statutory dues</span>
+            <span className="num" style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>₹53,710</span>
+          </div>
+          <div
+            style={{
+              position: 'absolute', bottom: '0%', right: '6%', zIndex: 3, padding: '7px 12px',
+              borderRadius: 'var(--radius-full)', border: '1px solid var(--primary-500)', background: 'var(--float-solid)',
+              boxShadow: '0 14px 32px -12px rgb(0 0 0 / .5)', display: 'flex', alignItems: 'center', gap: 7,
+            }}
+          >
+            <span style={{ width: 6, height: 6, borderRadius: 'var(--radius-full)', background: 'var(--primary-400)', animation: 'vPulse 1.8s ease-in-out infinite' }} />
+            <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 500, color: 'var(--pill-text)' }}>Agent active</span>
+          </div>
+        </div>
       </div>
     </section>
   );

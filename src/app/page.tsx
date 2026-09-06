@@ -1,44 +1,45 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AuroraBackdrop } from '@/components/AuroraBackdrop';
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
-import { FeaturesGrid } from '@/components/FeaturesGrid';
-import { FaqSection } from '@/components/FaqSection';
-import { WaitlistModal } from '@/components/WaitlistModal';
+import { Marquee } from '@/components/Marquee';
+import { JournalShowcase } from '@/components/JournalShowcase';
+import { NoticeCards } from '@/components/NoticeCards';
+import { HighlightStrip } from '@/components/HighlightStrip';
+import { WaitlistSection } from '@/components/WaitlistSection';
 import { Footer } from '@/components/Footer';
-import { InfiniteMarquee } from '@/components/InfiniteMarquee';
-import { ProductPreview } from '@/components/ProductPreview';
+import { themeVars, type Theme } from '@/lib/theme-vars';
 
 export default function Home() {
-  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+  const [theme, setTheme] = useState<Theme>('dark');
+  const [prefillEmail, setPrefillEmail] = useState('');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const handleQuickJoin = (email: string) => {
+    setPrefillEmail(email);
+    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--color-canvas)] text-[var(--color-text)] selection:bg-purple-500/20 selection:text-purple-200">
-      {/* Header Navigation */}
-      <Header onOpenWaitlist={() => setIsWaitlistOpen(true)} />
-
-      {/* Main Content Sections */}
-      <main className="flex-1">
-        {/* AI Hero Section with Live Countdown, Email Form & Interactive AI Copilot Mockup */}
-        <Hero onOpenWaitlist={() => setIsWaitlistOpen(true)} />
-
-        <InfiniteMarquee />
-        
-        <ProductPreview />
-
-        {/* AI Capabilities Grid */}
-        <FeaturesGrid />
-
-        {/* Frequently Asked Questions */}
-        <FaqSection />
-      </main>
-
-      {/* Footer */}
-      <Footer />
-
-      {/* VIP Early Access Modal */}
-      <WaitlistModal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)} />
+    <div style={{ minHeight: '100vh', position: 'relative', color: 'var(--color-text)', background: 'var(--color-canvas)', transition: 'background .25s', ...themeVars(theme) }}>
+      <AuroraBackdrop />
+      <div style={{ position: 'relative', zIndex: 1, overflowX: 'clip' }}>
+        <Header theme={theme} onToggleTheme={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))} />
+        <main style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px' }}>
+          <Hero onQuickJoin={handleQuickJoin} />
+          <Marquee />
+          <JournalShowcase />
+          <NoticeCards />
+          <HighlightStrip />
+          <WaitlistSection prefillEmail={prefillEmail} />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
@@ -12,33 +12,52 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+const SITE_URL = 'https://emplora.in';
+
 export const metadata: Metadata = {
-  title: 'Emplora | Autonomous AI Payroll & Intelligent HR',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Emplora | Payroll that closes its own books',
+    template: '%s | Emplora',
+  },
   description:
-    'Emplora uses autonomous AI agents to audit payroll runs, predict statutory EPF/ESIC deductions, detect salary anomalies, and answer HR queries in real-time. Launching September 2026.',
+    'The pay run, the statutory filing and the double-entry journal behind it — one system. EPF, ESIC, PT and TDS computed and filed on time. Launching 15 September 2026.',
   keywords: [
     'Emplora',
     'AI Payroll SaaS',
-    'Autonomous HR Copilot',
-    'Multi-Tenant HR',
-    'AI Anomaly Detection',
-    'EPF Compliance Automation',
-    'ESIC Calculation',
-    'Next-gen Payroll',
+    'Payroll accounting',
+    'EPF ESIC PT TDS',
+    'Multi-tenant payroll',
+    'Indian payroll compliance',
+    'Tally Busy export',
   ],
-  authors: [{ name: 'Emplora Team' }],
-  robots: 'index, follow',
+  authors: [{ name: 'Emplora Team', url: SITE_URL }],
+  creator: 'Emplora',
+  publisher: 'Emplora',
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    title: 'Emplora — Autonomous Payroll & Intelligent HR',
-    description: 'AI agents that audit payroll, predict compliance, and answer HR queries in real-time. Join the waitlist.',
+    url: SITE_URL,
+    locale: 'en_IN',
+    title: 'Emplora — Payroll that closes its own books',
+    description: 'The pay run, the statutory filing and the journal behind it — one system. Join the waitlist for 15 September 2026.',
     siteName: 'Emplora',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Emplora | Autonomous AI Payroll & Intelligent HR',
-    description: 'AI agents that audit payroll, predict compliance, and answer HR queries in real-time.',
+    title: 'Emplora | Payroll that closes its own books',
+    description: 'The pay run, the statutory filing and the journal behind it — one system.',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#0e1117' },
+    { media: '(prefers-color-scheme: light)', color: '#f1f3f7' },
+  ],
 };
 
 export default function RootLayout({

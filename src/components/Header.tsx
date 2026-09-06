@@ -1,86 +1,65 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Logo } from './Logo';
-import { Sun, Moon, ArrowRight } from 'lucide-react';
+import type { Theme } from '@/lib/theme-vars';
 
-interface HeaderProps {
-  onOpenWaitlist: () => void;
-}
-
-export const Header: React.FC<HeaderProps> = ({ onOpenWaitlist }) => {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    setTheme(currentTheme as 'dark' | 'light');
-
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
-  };
+export const Header: React.FC<{ theme: Theme; onToggleTheme: () => void }> = ({ theme, onToggleTheme }) => {
+  const isLight = theme === 'light';
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? 'bg-[var(--color-surface)]/80 backdrop-blur-xl border-b border-purple-500/20 shadow-md shadow-purple-500/5 py-3'
-          : 'bg-transparent py-5'
-      }`}
+      style={{
+        position: 'sticky', top: 0, zIndex: 40,
+        backdropFilter: 'blur(18px) saturate(150%)',
+        background: 'var(--glass-nav)',
+        borderBottom: '1px solid var(--hairline)',
+      }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
-        <a href="#" className="flex items-center group transition-transform hover:scale-105">
-          <Logo variant="lockup" size="md" />
+      <div style={{ maxWidth: 1180, margin: '0 auto', padding: '13px 24px', display: 'flex', alignItems: 'center', gap: 14 }}>
+        <a href="#" style={{ display: 'flex', alignItems: 'center' }}>
+          <Logo gradient size={26} />
         </a>
-
-        {/* Clean Center Navigation */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--color-text-muted)]">
-          <a href="#demo" className="hover:text-purple-400 transition-colors">
-            Interactive Demo
-          </a>
-          <a href="#features" className="hover:text-purple-400 transition-colors">
-            Features
-          </a>
-          <a href="#faq" className="hover:text-purple-400 transition-colors">
-            FAQ
-          </a>
-        </nav>
-
-        {/* Right Actions */}
-        <div className="flex items-center gap-3">
-          {/* Theme Switcher */}
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="w-10 h-10 grid place-items-center rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-2)] transition-colors"
-          >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
-
-          {/* Clean Waitlist CTA */}
-          <button
-            onClick={onOpenWaitlist}
-            className="px-5 h-10 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-medium transition-all shadow-lg shadow-purple-500/25 flex items-center gap-1.5 whitespace-nowrap hover:scale-105"
-            data-interactive="true"
-          >
-            <span>Waitlist</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
+        <span style={{ flex: 1 }} />
+        <button
+          onClick={onToggleTheme}
+          aria-label="Toggle theme"
+          title="Toggle theme"
+          style={{
+            flex: 'none', width: 38, height: 38, borderRadius: 'var(--radius-full)',
+            border: '1px solid var(--hairline)', background: 'var(--glass-card)',
+            display: 'grid', placeItems: 'center', cursor: 'pointer', color: 'var(--color-text)',
+          }}
+        >
+          {isLight ? (
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="4.2" />
+              <path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 14.2A8.2 8.2 0 1 1 9.8 4a6.4 6.4 0 0 0 10.2 10.2Z" />
+            </svg>
+          )}
+        </button>
+        <a
+          href="#waitlist"
+          style={{
+            position: 'relative', overflow: 'hidden', display: 'inline-flex', alignItems: 'center', gap: 7,
+            padding: '9px 17px', borderRadius: 'var(--radius-sm)', fontSize: 'var(--text-xs)', fontWeight: 500,
+            color: '#fff', background: 'linear-gradient(135deg, var(--primary-500), var(--primary-700))',
+            boxShadow: '0 6px 20px -6px var(--primary-600), inset 0 1px 0 rgb(255 255 255 / .22)',
+          }}
+        >
+          <span
+            style={{
+              position: 'absolute', top: 0, bottom: 0, width: '34%',
+              background: 'linear-gradient(90deg, transparent, rgb(255 255 255 / .3), transparent)',
+              animation: 'vSheen 4.6s ease-in-out infinite',
+            }}
+          />
+          <span style={{ position: 'relative' }}>Join the waitlist</span>
+        </a>
       </div>
     </header>
   );
