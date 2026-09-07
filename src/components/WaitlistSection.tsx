@@ -111,7 +111,7 @@ export const WaitlistSection: React.FC<{ prefillEmail?: string }> = ({ prefillEm
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 13 }}>
                 <div className="field" style={{ margin: 0 }}>
                   <label className="label-req">Your name</label>
-                  <input className="input" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Abhinav Jha" style={{ background: 'var(--glass-card)', borderColor: 'var(--hairline)' }} />
+                  <input className="input" required value={name} onChange={(e) => setName(e.target.value)} placeholder="John Doe" style={{ background: 'var(--glass-card)', borderColor: 'var(--hairline)' }} />
                 </div>
                 <div className="field" style={{ margin: 0 }}>
                   <label className="label-req">Work email</label>
